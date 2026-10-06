@@ -1,28 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>InsaneVanguard - BGMI Teammate Finder</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>InsaneVanguard | BGMI Teammate Finder</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0b0f;
+      color: white;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background: #15151d;
+      border-bottom: 1px solid #292934;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: none;
+      margin: auto;
+    }
+
+    .brand {
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .tagline {
+      margin-top: 8px;
+      color: #aaa;
+    }
+
+    .hero {
+      padding: 45px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      margin: 6px;
+      border-radius: 10px;
+      border: none;
+      background: #ffb000;
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .btn.secondary {
+      background: #252530;
+      color: white;
+    }
+
+    .features {
+      padding: 20px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .card {
+      background: #15151d;
+      border: 1px solid #292934;
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #aaa;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      color: #777;
+    }
+  </style>
 </head>
 
 <body>
 
-  <h1>INSANEVANGUARD</h1>
-  <p>Find your perfect BGMI teammates.</p>
+<header>
 
-  <hr>
+  <!-- YOUR LOGO WILL GO HERE -->
+  <img id="logo" class="logo" src="" alt="InsaneVanguard Logo">
 
-  <h2>🎮 Find Teammates</h2>
-  <button>Find Players</button>
+  <div class="brand">INSANEVANGUARD</div>
+  <div class="tagline">BGMI Teammate Finder</div>
 
-  <h2>👤 Create Profile</h2>
-  <button>Create Your Profile</button>
+</header>
 
-  <h2>🏆 Create Team</h2>
-  <button>Create a Team</button>
+<section class="hero">
 
-  <h2>💬 Chat</h2>
-  <button>Chat With Teammates</button>
+  <h1>Find Your Squad 🎮</h1>
+
+  <p>
+    Find skilled BGMI teammates, create your squad
+    and play together.
+  </p>
+
+  <a href="#" class="btn">Find Teammates</a>
+
+  <a href="#" class="btn secondary">Create Profile</a>
+
+</section>
+
+<section class="features">
+
+  <div class="card">
+    <h2>🔎 Find Teammates</h2>
+    <p>
+      Search players by tier, role, language and playing style.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>👤 Player Profiles</h2>
+    <p>
+      Create your profile with your BGMI information and profile photo.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>🏆 Create Teams</h2>
+    <p>
+      Build your own squad and find players to complete your team.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>💬 Chat</h2>
+    <p>
+      Connect and chat with teammates.
+    </p>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 InsaneVanguard
+</footer>
 
 </body>
 </html>
