@@ -228,7 +228,13 @@
     <button type="button" onclick="joinTeam()">JOIN TEAM FINDER</button>
   </div>
 </section>
+<section id="players">
+  <h2>Players</h2>
 
+  <div class="card" id="playerList">
+    <p>No players joined yet.</p>
+  </div>
+</section>
 <section id="about">
   <h2>About INSANE VANGUARD</h2>
 
@@ -247,8 +253,47 @@
 
 <script>
 function joinTeam() {
-  alert("Welcome to INSANE VANGUARD ESPORTS! Your profile has been submitted.");
+  const name = document.getElementById("playerName").value.trim();
+  const bgmi = document.getElementById("bgmiId").value.trim();
+  const role = document.getElementById("role").value;
+  const tier = document.getElementById("tier").value;
+
+  if (!name || !bgmi || !role || !tier) {
+    alert("Please fill Player Name, BGMI ID, Role and Tier.");
+    return;
+  }
+
+  const player = {
+    name: name,
+    bgmi: bgmi,
+    role: role,
+    tier: tier
+  };
+
+  localStorage.setItem("ivPlayer", JSON.stringify(player));
+
+  showPlayer();
+
+  alert("Profile saved successfully! 🔥");
 }
+
+function showPlayer() {
+  const saved = localStorage.getItem("ivPlayer");
+  const list = document.getElementById("playerList");
+
+  if (!saved) return;
+
+  const player = JSON.parse(saved);
+
+  list.innerHTML = `
+    <h3>${player.name}</h3>
+    <p>🎮 BGMI ID: ${player.bgmi}</p>
+    <p>🎯 Role: ${player.role}</p>
+    <p>🏆 Tier: ${player.tier}</p>
+  `;
+}
+
+showPlayer();
 </script>
 
 </body>
