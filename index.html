@@ -289,66 +289,60 @@
 
 function joinTeam() {
 
-  const name =
-    document.getElementById("playerName").value.trim();
+  async function loadPlayers() {
 
-  const bgmi =
-    document.getElementById("bgmiId").value.trim();
+  const list = document.getElementById("playerList");
 
-  const role =
-    document.getElementById("role").value;
+  list.innerHTML = "<p>Loading players...</p>";
 
-  const tier =
-    document.getElementById("tier").value;
+  try {
 
-  const language =
-    document.getElementById("language").value;
-
-  const about =
-    document.getElementById("aboutPlayer").value.trim();
-
-
-  if (!name || !bgmi || !role || !tier) {
-
-    alert(
-      "Please fill Player Name, BGMI ID, Role and Tier."
+    const snapshot = await window.firebaseGetDocs(
+      window.firebaseCollection(
+        window.firebaseDB,
+        "players"
+      )
     );
 
-    return;
+    if (snapshot.empty) {
+      list.innerHTML = "<p>No players joined yet.</p>";
+      return;
+    }
+
+    list.innerHTML = "";
+
+    snapshot.forEach((doc) => {
+
+      const player = doc.data();
+
+      const div = document.createElement("div");
+
+      div.className = "player";
+
+      div.innerHTML = `
+        <h3>${player.name}</h3>
+        <p>🎮 BGMI ID: ${player.bgmi}</p>
+        <p>🎯 Role: ${player.role}</p>
+        <p>🏆 Tier: ${player.tier}</p>
+        <p>🌐 Language: ${player.language || "Not specified"}</p>
+        <p>📝 ${player.about || "No description provided."}</p>
+      `;
+
+      list.appendChild(div);
+
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    list.innerHTML =
+      "<p>Unable to load players.</p>";
+
   }
-
-
-  const player = {
-
-    name: name,
-
-    bgmi: bgmi,
-
-    role: role,
-
-    tier: tier,
-
-    language: language,
-
-    about: about
-
-  };
-
-
-  localStorage.setItem(
-    "ivPlayer",
-    JSON.stringify(player)
-  );
-
-
-  showPlayer();
-
-
-  alert(
-    "Profile saved successfully! 🔥"
-  );
-
 }
+
+loadPlayers();
 
 
 function showPlayer() {
@@ -394,12 +388,26 @@ function showPlayer() {
 
   `;
 
-}
-
-
-showPlayer();
+loadPlayer();
 
 </script>
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDhwR5Wk7_odWgLUyqKEtS5BS-22vBFGuI",
+  authDomain: "insanevanguardesports.firebaseapp.com",
+  projectId: "insanevanguardesports",
+  storageBucket: "insanevanguardesports.firebasestorage.app",
+  messagingSenderId: "997549369698",
+  appId: "1:997549369698:web:cdd921cf8510bb0fa6643b"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 </body>
 </html>
