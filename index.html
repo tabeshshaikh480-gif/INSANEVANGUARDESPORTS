@@ -435,7 +435,7 @@ async function loadPlayers() {
 }
 
 
-window.joinTeam = joinTeam;
+document.getElementById("joinButton").addEventListener("click", joinTeam);
 
 loadPlayers();
 
