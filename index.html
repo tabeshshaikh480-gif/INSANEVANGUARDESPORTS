@@ -147,23 +147,36 @@
     }
 
     .player {
-      background: #0d0d0d;
-      border: 1px solid #333;
-      border-left: 4px solid #ff3c00;
-      padding: 18px;
-      border-radius: 8px;
-      margin-top: 12px;
-    }
+  background: linear-gradient(145deg, #151515, #0b0b0b);
+  border: 1px solid #333;
+  border-top: 3px solid #ff3c00;
+  padding: 20px;
+  border-radius: 14px;
+  margin-top: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
 
-    .player h3 {
-      color: #ff3c00;
-      margin-bottom: 10px;
-    }
+.player h3 {
+  color: #ff3c00;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
 
-    .player p {
-      color: #ccc;
-      margin: 5px 0;
-    }
+.player p {
+  color: #ccc;
+  margin: 7px 0;
+}
+
+.player .badge {
+  display: inline-block;
+  background: #ff3c00;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 3px 3px 8px 0;
+}
 
     footer {
       text-align: center;
@@ -393,13 +406,19 @@ async function loadPlayers() {
       div.className = "player";
 
       div.innerHTML = `
-        <h3>${player.name}</h3>
-        <p>🎮 BGMI ID: ${player.bgmi}</p>
-        <p>🎯 Role: ${player.role}</p>
-        <p>🏆 Tier: ${player.tier}</p>
-        <p>🌐 Language: ${player.language || "Not specified"}</p>
-        <p>📝 ${player.about || "No description provided."}</p>
-      `;
+
+  <h3>🎮 ${player.name}</h3>
+
+  <span class="badge">🎯 ${player.role}</span>
+  <span class="badge">🏆 ${player.tier}</span>
+  <span class="badge">🌐 ${player.language || "N/A"}</span>
+
+  <p><strong>BGMI ID:</strong> ${player.bgmi}</p>
+
+  <p><strong>About:</strong><br>
+  ${player.about || "No description provided."}</p>
+
+`;
 
       list.appendChild(div);
 
