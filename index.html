@@ -266,7 +266,12 @@
 
 <section id="players">
   <h2>Players</h2>
-
+  
+  <input
+  type="text"
+  id="searchPlayers"
+  placeholder="🔎 Search players..."
+>
   <div class="card" id="playerList">
     <p>No players joined yet.</p>
   </div>
@@ -415,10 +420,26 @@ document
   .getElementById("joinButton")
   .addEventListener("click", joinTeam);
 
+document.getElementById("searchPlayers").addEventListener("input", function() {
+  const search = this.value.toLowerCase();
+
+  const players = document.querySelectorAll(".player");
+
+  players.forEach(function(player) {
+    const text = player.innerText.toLowerCase();
+
+    if (text.includes(search)) {
+      player.style.display = "block";
+    } else {
+      player.style.display = "none";
+    }
+  });
+});
 
 loadPlayers();
 
 </script>
+
 
 
 </body>
