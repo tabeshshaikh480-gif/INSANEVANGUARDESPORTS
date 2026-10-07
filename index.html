@@ -255,11 +255,6 @@
     ></textarea>
 
     <button type="button" id="joinButton">JOIN TEAM FINDER</button>
-<script>
-document.getElementById("joinButton").onclick = function() {
-  alert("BUTTON IS WORKING!");
-};
-</script>
 
   </div>
 </section>
@@ -289,32 +284,6 @@ document.getElementById("joinButton").onclick = function() {
 </footer>
 
 <script type="module">
-
-import { initializeApp } from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs
-} from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
 
 async function joinTeam() {
 
