@@ -152,7 +152,44 @@
   <a class="button" href="#find">Find Teammates</a>
 </section>
 
-<section id="find">
+<div class="card">
+  <input id="playerName" type="text" placeholder="Player Name / IGN">
+
+  <input id="bgmiId" type="text" placeholder="BGMI ID">
+
+  <select id="role">
+    <option value="">Select Role</option>
+    <option>IGL</option>
+    <option>Assaulter</option>
+    <option>Support</option>
+    <option>Sniper</option>
+    <option>Entry Fragger</option>
+  </select>
+
+  <select id="tier">
+    <option value="">Select Tier</option>
+    <option>Conqueror</option>
+    <option>Ace Master</option>
+    <option>Ace Dominator</option>
+    <option>Ace</option>
+    <option>Crown</option>
+  </select>
+
+  <select id="language">
+    <option value="">Select Language</option>
+    <option>Hindi</option>
+    <option>English</option>
+    <option>Marathi</option>
+    <option>Hinglish</option>
+  </select>
+
+  <textarea id="aboutPlayer" rows="4"
+    placeholder="Tell us about yourself"></textarea>
+
+  <button type="button" onclick="joinTeam()">
+    JOIN TEAM FINDER
+  </button>
+</div>
   <h2>Find Your Teammate</h2>
 
   <div class="card">
