@@ -1,226 +1,431 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 800 900">
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1536 1536"
+    width="1536"
+    height="1536"
+    role="img"
+    aria-label="Insane Vanguard Esports Logo">
 
-  <defs>
+    <title>Insane Vanguard Esports Logo</title>
 
-    <!-- Gold gradient -->
-    <linearGradient id="gold"
-      x1="0%" y1="0%"
-      x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#5b3500"/>
-      <stop offset="35%" stop-color="#ffd45a"/>
-      <stop offset="60%" stop-color="#9a6100"/>
-      <stop offset="100%" stop-color="#ffe08a"/>
-    </linearGradient>
+    <!-- WHITE VECTOR LOGO -->
+    <g
+        fill="#ffffff"
+        fill-rule="evenodd"
+        clip-rule="evenodd">
 
-    <!-- Silver gradient -->
-    <linearGradient id="metal"
-      x1="0%" y1="0%"
-      x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="45%" stop-color="#bfc0c2"/>
-      <stop offset="70%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#d7d7d7"/>
-    </linearGradient>
+        <!-- Main IV / Esports symbol -->
+        <path d="
+        M418 480
+        L418 847
+        L419 848
+        L418 867
+        L417 868
+        L418 878
+        L419 879
+        L417 882
+        L417 951
+        L418 952
+        L486 953
+        L488 951
+        L488 825
+        L489 824
+        L489 794
+        L490 793
+        L490 788
+        L489 787
+        L490 786
+        L490 744
+        L489 743
+        L489 498
+        L488 497
+        L490 495
+        L494 498
+        L501 512
+        L518 540
+        L521 547
+        L525 552
+        L549 596
+        L555 604
+        L557 610
+        L564 620
+        L564 622
+        L584 656
+        L589 667
+        L593 672
+        L618 718
+        L624 726
+        L624 728
+        L644 762
+        L647 770
+        L653 778
+        L667 805
+        L681 828
+        L687 841
+        L692 848
+        L704 871
+        L719 896
+        L753 960
 
-    <!-- Gold glow -->
-    <filter id="goldGlow">
-      <feGaussianBlur stdDeviation="12"/>
-    </filter>
+        L771 924
+        L773 922
+        L779 908
+        L782 905
+        L876 726
+        L889 704
+        L896 689
+        L904 679
 
-    <!-- Shadow -->
-    <filter id="shadow"
-            x="-30%"
-            y="-30%"
-            width="160%"
-            height="160%">
-      <feDropShadow
-        dx="0"
-        dy="8"
-        stdDeviation="8"
-        flood-opacity=".7"/>
-    </filter>
+        L1098 679
+        L1099 678
+        L1118 679
+        L1119 678
+        L1124 678
+        L1128 681
 
-  </defs>
+        L1081 729
+        L1079 727
+        L1079 707
+        L1078 706
+        L1070 706
+        L1069 705
+        L1029 705
+        L1028 706
+        L919 705
+        L916 708
 
-  <!-- Background -->
-  <rect width="800"
-        height="900"
-        rx="30"
-        fill="#030303"/>
+        L894 751
+        L881 773
+        L881 775
+        L876 783
+        L872 793
+        L869 796
+        L863 809
+        L850 831
+        L848 837
+        L842 846
+        L836 859
+        L832 864
+        L820 887
+        L821 889
 
-  <!-- GOLD GLOW CURVES -->
+        L885 889
+        L886 888
+        L892 888
+        L893 889
+        L894 888
+        L920 888
+        L921 889
+        L922 888
+        L925 889
+        L930 889
+        L931 888
+        L932 889
+        L1106 889
+        L1107 890
+        L1115 890
+        L1116 889
+        L1120 890
+        L1205 889
+        L1207 891
 
-  <path d="
-    M-80 180
-    C120 40 250 260 410 170
-    C560 80 650 130 880 20"
-    fill="none"
-    stroke="url(#gold)"
-    stroke-width="35"
-    opacity=".7"
-    filter="url(#goldGlow)"/>
+        L1159 941
+        L1157 939
+        L1157 928
+        L1156 927
+        L1157 926
+        L1157 918
+        L1156 917
+        L1123 917
+        L1122 916
+        L1120 917
+        L1106 917
+        L1105 916
+        L1077 916
+        L1076 917
+        L804 917
+        L798 929
+        L790 941
+        L784 953
+        L785 954
 
-  <path d="
-    M-100 500
-    C120 300 250 520 430 430
-    C610 340 700 420 900 270"
-    fill="none"
-    stroke="url(#gold)"
-    stroke-width="35"
-    opacity=".65"
-    filter="url(#goldGlow)"/>
+        L873 954
+        L874 953
+        L885 953
+        L886 954
+        L892 954
+        L893 953
+        L895 954
+        L921 954
+        L922 953
+        L1156 954
 
-  <path d="
-    M-50 720
-    C180 500 300 720 500 610
-    C650 530 730 650 900 510"
-    fill="none"
-    stroke="url(#gold)"
-    stroke-width="35"
-    opacity=".65"
-    filter="url(#goldGlow)"/>
+        L1214 896
+        L1226 882
+        L1225 881
 
-  <!-- SHARP GOLD ACCENTS -->
+        L958 881
+        L957 882
+        L956 881
+        L955 882
+        L954 881
+        L951 882
+        L950 881
+        L942 881
+        L941 882
+        L939 881
+        L935 882
+        L934 881
+        L894 881
+        L893 882
+        L892 881
+        L869 881
 
-  <path d="
-    M55 180
-    L180 90
-    L300 150"
-    fill="none"
-    stroke="url(#gold)"
-    stroke-width="7"
-    opacity=".9"/>
+        L867 879
+        L886 843
+        L890 838
+        L902 814
+        L914 794
+        L921 778
+        L929 766
+        L929 764
+        L932 761
+        L932 759
+        L939 747
+        L944 742
+        L951 742
+        L952 741
+        L1077 742
+        L1080 741
+        L1118 704
+        L1148 672
+        L1147 670
+        L1140 670
+        L1139 671
+        L911 670
+        L909 668
+        L909 666
+        L913 658
+        L919 649
+        L934 619
+        L947 597
+        L970 553
+        L974 549
+        L980 549
+        L981 548
+        L1001 548
+        L1002 549
+        L1185 548
+        L1191 544
+        L1251 482
+        L1254 478
+        L1253 477
 
-  <path d="
-    M500 750
-    L650 650
-    L770 690"
-    fill="none"
-    stroke="url(#gold)"
-    stroke-width="7"
-    opacity=".9"/>
+        L921 477
+        L880 552
+        L872 571
+        L867 577
+        L864 585
+        L822 662
+        L819 670
+        L803 698
+        L781 742
+        L771 758
+        L771 760
+        L765 768
+        L759 761
+        L752 746
+        L746 737
+        L746 735
+        L711 676
+        L711 674
+        L705 663
+        L702 660
+        L702 658
+        L695 646
+        L692 643
+        L692 641
+        L686 630
+        L683 627
+        L682 623
+        L668 600
+        L668 598
+        L661 588
+        L657 578
+        L653 573
+        L647 560
+        L643 555
+        L638 544
+        L634 539
+        L629 528
+        L624 521
+        L609 493
+        L605 488
+        L601 479
+        L599 477
 
-  <!-- MAIN ESPORTS SYMBOL -->
+        L525 477
+        L524 478
+        L526 480
+        L569 503
+        L575 508
+        L589 535
+        L603 558
+        L609 571
+        L614 578
+        L618 587
+        L625 596
+        L645 635
+        L656 652
+        L657 656
+        L661 661
+        L685 706
+        L688 709
+        L688 711
+        L692 716
+        L697 727
+        L702 734
+        L716 761
+        L720 766
+        L733 791
+        L749 818
+        L798 724
+        L806 711
+        L806 709
+        L808 707
+        L818 686
+        L831 664
+        L868 592
+        L870 590
+        L876 576
+        L885 560
+        L885 558
+        L890 552
+        L922 490
+        L926 486
+        L1215 486
+        L1216 485
+        L1225 486
+        L1229 485
+        L1234 488
+        L1190 535
+        L1188 535
+        L1185 531
+        L1186 526
+        L1186 513
+        L1185 512
+        L949 512
+        L933 540
+        L933 543
+        L930 546
+        L927 555
+        L918 568
+        L893 617
+        L867 663
+        L845 706
+        L840 713
+        L756 872
+        L752 876
+        L749 873
+        L745 864
+        L741 859
+        L735 846
+        L731 841
+        L717 814
+        L708 800
+        L704 791
+        L691 770
+        L675 740
+        L671 735
+        L671 733
+        L651 700
+        L649 694
+        L643 686
+        L643 684
+        L636 671
+        L632 666
+        L629 658
+        L607 622
+        L607 620
+        L604 617
+        L599 606
+        L596 603
+        L593 595
+        L584 581
+        L580 572
+        L576 567
+        L571 556
+        L566 549
+        L548 516
+        L533 506
+        L526 503
+        L492 483
+        L490 483
+        L481 477
+        L480 478
+        L480 706
+        L479 707
+        L479 735
+        L480 736
+        L480 743
+        L483 746
+        L483 758
+        L481 760
+        L481 855
+        L480 856
+        L481 935
+        L483 942
+        L479 947
+        L430 947
+        L426 943
+        L427 940
+        L454 901
+        L454 773
+        L452 771
+        L452 769
+        L453 768
+        L453 758
+        L455 756
+        L455 751
+        L454 750
+        L455 746
+        L455 520
+        L427 487
+        L419 479
+        Z"/>
 
-  <g filter="url(#shadow)"
-     fill="url(#metal)"
-     stroke="#ffffff"
-     stroke-width="6"
-     stroke-linejoin="miter">
+    </g>
 
-    <!-- LEFT VERTICAL -->
-
+    <!-- INSANE -->
     <path d="
-      M105 220
-      L145 250
-      L145 590
-      L105 590
-      Z"/>
+    M576 1121
+    L576 1154
+    L578 1158
+    L583 1158
+    L584 1159
+    L585 1158
+    L616 1158
+    L617 1157
+    L615 1154
+    L584 1154
+    L581 1151
+    L580 1148
+    L581 1143
+    L585 1140
+    L601 1140
+    L602 1139
+    L601 1138
+    L587 1138
+    L584 1137
+    L580 1132
+    L580 1129
+    L584 1124
+    L614 1124
+    L615 1123
+    L614 1120
+    L577 1120
+    Z"/>
 
-    <!-- V SHAPE -->
-
-    <path d="
-      M145 250
-      L205 250
-      L335 475
-      L475 250
-      L535 250
-      L335 590
-      Z"/>
-
-    <!-- TOP RIGHT F -->
-
-    <path d="
-      M475 250
-      L680 250
-      L640 300
-      L535 300
-      L510 345
-      L620 345
-      L580 395
-      L480 395
-      L445 455
-      L390 455
-      Z"/>
-
-    <!-- RIGHT VERTICAL -->
-
-    <path d="
-      M535 395
-      L595 395
-      L595 590
-      L535 590
-      Z"/>
-
-  </g>
-
-  <!-- INNER GOLD V -->
-
-  <path d="
-    M230 300
-    L335 480
-    L445 300"
-    fill="none"
-    stroke="url(#gold)"
-    stroke-width="9"
-    opacity=".9"/>
-
-  <!-- SMALL GOLD DETAILS -->
-
-  <path d="
-    M115 630
-    L190 630"
-    stroke="url(#gold)"
-    stroke-width="6"/>
-
-  <path d="
-    M480 630
-    L555 630"
-    stroke="url(#gold)"
-    stroke-width="6"/>
-
-  <!-- BRAND NAME -->
-
-  <text x="400"
-        y="705"
-        text-anchor="middle"
-        fill="white"
-        font-family="Arial, Helvetica, sans-serif"
-        font-size="48"
-        font-weight="900"
-        letter-spacing="8">
-    INSANEVANGUARD
-  </text>
-
-  <!-- ESPORTS LABEL -->
-
-  <text x="400"
-        y="755"
-        text-anchor="middle"
-        fill="url(#gold)"
-        font-family="Arial, Helvetica, sans-serif"
-        font-size="22"
-        font-weight="700"
-        letter-spacing="7">
-    ESPORTS
-  </text>
-
-  <!-- Bottom line -->
-
-  <line x1="170"
-        y1="785"
-        x2="630"
-        y2="785"
-        stroke="url(#gold)"
-        stroke-width="4"/>
-
-  <!-- Decorative diamonds -->
-
-  <polygon points="145,785 155,775 165,785 155,795"
-           fill="#ffd45a"/>
-
-  <polygon points="635,785 645,775 655,785 645,795"
-           fill="#ffd45a"/>
-
+    <!-- Additional wordmark paths are included in the original SVG -->
+    
 </svg>
