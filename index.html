@@ -548,33 +548,47 @@ document.getElementById("searchPlayers").addEventListener("input", function() {
       player.style.display = "none";
     }
   });
-});
+}
 
- const savedProfile = JSON.parse(localStorage.getItem("myProfile"));
+const savedProfile = JSON.parse(localStorage.getItem("myProfile"));
 
 if (savedProfile) {
-  document.getElementById("profileName").textContent = savedProfile.name;
-  document.getElementById("profileBgmi").textContent = savedProfile.bgmi;
-  document.getElementById("profileRole").textContent = savedProfile.role;
-  document.getElementById("profileTier").textContent = savedProfile.tier;
-  document.getElementById("profileLanguage").textContent = savedProfile.language;
-}
 
+  document.getElementById("profileName").textContent =
+    savedProfile.name;
 
-if (localStorage.getItem("myProfile")) {
+  document.getElementById("profileBgmi").textContent =
+    savedProfile.bgmi;
+
+  document.getElementById("profileRole").textContent =
+    savedProfile.role;
+
+  document.getElementById("profileTier").textContent =
+    savedProfile.tier;
+
+  document.getElementById("profileLanguage").textContent =
+    savedProfile.language;
+
   document.getElementById("profileForm").style.display = "none";
-  document.getElementById("profileCreatedMessage").style.display = "block";
-}
 
-loadPlayers();
+  document.getElementById("profileCreatedMessage").style.display =
+    "block";
+}
 
 document.getElementById("profileButton").addEventListener("click", function() {
+
   document.getElementById("profilePanel").style.display = "block";
+
 });
 
 document.getElementById("closeProfile").addEventListener("click", function() {
+
   document.getElementById("profilePanel").style.display = "none";
+
 });
+
+
+loadPlayers();
 
 </script>
 
