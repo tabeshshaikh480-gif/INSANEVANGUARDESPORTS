@@ -560,6 +560,12 @@ if (savedProfile) {
   document.getElementById("profileLanguage").textContent = savedProfile.language;
 }
 
+
+if (localStorage.getItem("myProfile")) {
+  document.getElementById("profileForm").style.display = "none";
+  document.getElementById("profileCreatedMessage").style.display = "block";
+}
+
 loadPlayers();
 
 document.getElementById("profileButton").addEventListener("click", function() {
