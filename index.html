@@ -17,7 +17,39 @@
   margin-top: 10px;
   margin-bottom: 15px;
 }
+     .site-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.profile-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: auto;
+  padding: 10px 16px;
+  background: #151515;
+  border: 1px solid #ff3c00;
+  color: white;
+}
+
+.profile-button:hover {
+  background: #ff3c00;
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    padding-top: 65px;
+  }
+
+  .profile-button {
+    top: 12px;
+    right: 12px;
+  }
+}
+    
     html {
       scroll-behavior: smooth;
     }
@@ -201,9 +233,17 @@
 
 <body>
 
-<header>
-  <h1>INSANE VANGUARD ESPORTS</h1>
-  <p>BGMI Esports Community</p>
+<header class="site-header">
+
+  <div>
+    <h1>INSANE VANGUARD ESPORTS</h1>
+    <p>BGMI Esports Community</p>
+  </div>
+
+  <button type="button" id="profileButton" class="profile-button">
+    👤 Profile
+  </button>
+
 </header>
 
 <nav>
@@ -457,9 +497,15 @@ document.getElementById("searchPlayers").addEventListener("input", function() {
 
 loadPlayers();
 
+document.getElementById("profileButton").addEventListener("click", function() {
+  document.getElementById("profilePanel").style.display = "block";
+});
+
+document.getElementById("closeProfile").addEventListener("click", function() {
+  document.getElementById("profilePanel").style.display = "none";
+});
+
 </script>
-
-
 
 </body>
 </html>
