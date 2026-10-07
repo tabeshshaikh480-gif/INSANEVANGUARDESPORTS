@@ -3,71 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>INSANE VANGUARD ESPORTS</title>
 
   <style>
-    *{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-#searchPlayers {
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
-     .site-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.profile-button {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  width: auto;
-  padding: 10px 16px;
-  background: #151515;
-  border: 1px solid #ff3c00;
-  color: white;
-}
-
-.profile-button:hover {
-  background: #ff3c00;
-}
-
-@media (max-width: 600px) {
-  .site-header {
-    padding-top: 65px;
-  }
-
-  .profile-button {
-    top: 12px;
-    right: 12px;
-  }
-}
-    .profile-photo-section {
-  margin: 15px 0;
-}
-
-.profile-photo-section label {
-  display: block;
-  color: #ff3c00;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.profile-photo-section input {
-  width: 100%;
-  padding: 10px;
-  background: #151515;
-  color: white;
-  border: 1px solid #333;
-  border-radius: 8px;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     html {
       scroll-behavior: smooth;
@@ -94,6 +37,57 @@
     header p {
       color: #aaa;
       margin-top: 6px;
+    }
+
+    .site-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-button {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      width: auto;
+      padding: 10px 16px;
+      background: #151515;
+      border: 1px solid #ff3c00;
+      color: white;
+    }
+
+    .profile-button:hover {
+      background: #ff3c00;
+    }
+
+    .profile-panel {
+      display: none;
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 300px;
+      background: #111;
+      border: 1px solid #ff3c00;
+      border-radius: 15px;
+      padding: 20px;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    .profile-panel h2 {
+      color: #ff3c00;
+      margin-bottom: 20px;
+    }
+
+    .profile-panel p {
+      color: #ddd;
+      margin: 10px 0;
+    }
+
+    .profile-panel button {
+      width: 100%;
+      margin-top: 15px;
     }
 
     nav {
@@ -197,37 +191,53 @@
       background: #ff5a26;
     }
 
+    .profile-photo-section {
+      margin: 15px 0;
+    }
+
+    .profile-photo-section label {
+      display: block;
+      color: #ff3c00;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
     .player {
-  background: linear-gradient(145deg, #151515, #0b0b0b);
-  border: 1px solid #333;
-  border-top: 3px solid #ff3c00;
-  padding: 20px;
-  border-radius: 14px;
-  margin-top: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-}
+      background: linear-gradient(145deg, #151515, #0b0b0b);
+      border: 1px solid #333;
+      border-top: 3px solid #ff3c00;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    }
 
-.player h3 {
-  color: #ff3c00;
-  font-size: 22px;
-  margin-bottom: 12px;
-}
+    .player h3 {
+      color: #ff3c00;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
 
-.player p {
-  color: #ccc;
-  margin: 7px 0;
-}
+    .player p {
+      color: #ccc;
+      margin: 7px 0;
+    }
 
-.player .badge {
-  display: inline-block;
-  background: #ff3c00;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 3px 3px 8px 0;
-}
+    .player .badge {
+      display: inline-block;
+      background: #ff3c00;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin: 3px 3px 8px 0;
+    }
+
+    #searchPlayers {
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
 
     footer {
       text-align: center;
@@ -238,6 +248,21 @@
     }
 
     @media (max-width: 600px) {
+      .site-header {
+        padding-top: 65px;
+      }
+
+      .profile-button {
+        top: 12px;
+        right: 12px;
+      }
+
+      .profile-panel {
+        right: 10px;
+        left: 10px;
+        width: auto;
+      }
+
       .hero h2 {
         font-size: 32px;
       }
@@ -253,7 +278,6 @@
 <body>
 
 <header class="site-header">
-
   <div>
     <h1>INSANE VANGUARD ESPORTS</h1>
     <p>BGMI Esports Community</p>
@@ -262,10 +286,9 @@
   <button type="button" id="profileButton" class="profile-button">
     👤 Profile
   </button>
-
 </header>
-<div id="profilePanel" class="profile-panel">
 
+<div id="profilePanel" class="profile-panel">
   <h2>👤 My Profile</h2>
 
   <p><strong>IGN:</strong> <span id="profileName">Not set</span></p>
@@ -275,8 +298,8 @@
   <p><strong>Language:</strong> <span id="profileLanguage">Not set</span></p>
 
   <button type="button" id="closeProfile">Close</button>
-
 </div>
+
 <nav>
   <a href="#home">Home</a>
   <a href="#find">Make Your Profile</a>
@@ -287,17 +310,18 @@
 <section class="hero" id="home">
   <h2>MAKE YOUR <span>PROFILE</span></h2>
 
-<p>
-  Create your BGMI esports profile and connect with playersFind teammates and build your squad.
-</p>
+  <p>
+    Create your BGMI esports profile and connect with players.
+    Find teammates and build your squad.
+  </p>
 
-<a class="button" href="#find">MAKE YOUR PROFILE</a>
+  <a class="button" href="#find">MAKE YOUR PROFILE</a>
 </section>
 
 <section id="find">
   <h2>MAKE YOUR PROFILE</h2>
 
-  <div class="card">
+  <div class="card" id="profileForm">
 
     <input
       id="playerName"
@@ -336,18 +360,16 @@
       <option>Marathi</option>
       <option>Hinglish</option>
     </select>
-    
-     <div class="profile-photo-section">
 
-  <label for="profilePhoto">Profile Photo</label>
+    <div class="profile-photo-section">
+      <label for="profilePhoto">Profile Photo</label>
 
-  <input
-    type="file"
-    id="profilePhoto"
-    accept="image/*"
-  >
-
-</div>
+      <input
+        type="file"
+        id="profilePhoto"
+        accept="image/*"
+      >
+    </div>
 
     <textarea
       id="aboutPlayer"
@@ -355,23 +377,35 @@
       placeholder="Tell us about yourself"
     ></textarea>
 
-document.getElementById("profileForm").style.display = "none";
-document.getElementById("profileCreatedMessage").style.display = "block";
-
-    <button type="button" id="joinButton">CREATE MY PROFILE 🔥</button>
+    <button type="button" id="joinButton">
+      CREATE MY PROFILE 🔥
+    </button>
 
   </div>
 
+  <div
+    id="profileCreatedMessage"
+    class="card"
+    style="display:none;"
+  >
+    <h2>🔥 PROFILE CREATED</h2>
+    <p>Your BGMI profile is ready!</p>
+
+    <button type="button" id="viewMyProfile">
+      VIEW MY PROFILE 👤
+    </button>
+  </div>
 </section>
 
 <section id="players">
   <h2>Players</h2>
-  
+
   <input
-  type="text"
-  id="searchPlayers"
-  placeholder="🔎 Search players..."
->
+    type="text"
+    id="searchPlayers"
+    placeholder="🔎 Search players..."
+  >
+
   <div class="card" id="playerList">
     <p>No players joined yet.</p>
   </div>
@@ -406,6 +440,11 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
+/* =====================================================
+   🔥 PASTE YOUR FIREBASE CONFIG HERE
+   ===================================================== */
+
 const firebaseConfig = {
   apiKey: "AIzaSyDhwR5Wk7_odWgLUyqKEtS5BS-22vBFGuI",
   authDomain: "insanevanguardesports.firebaseapp.com",
@@ -415,8 +454,18 @@ const firebaseConfig = {
   appId: "1:997549369698:web:cdd921cf8510bb0fa6643b"
 };
 
+
+/* =====================================================
+   FIREBASE START
+   ===================================================== */
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+
+/* =====================================================
+   CREATE PROFILE
+   ===================================================== */
 
 async function joinTeam() {
 
@@ -427,8 +476,8 @@ async function joinTeam() {
   const language = document.getElementById("language").value;
   const about = document.getElementById("aboutPlayer").value.trim();
 
-  if (!name || !bgmi || !role || !tier) {
-    alert("Please fill Player Name, BGMI ID, Role and Tier.");
+  if (!name || !bgmi || !role || !tier || !language) {
+    alert("Please fill all required fields.");
     return;
   }
 
@@ -441,19 +490,20 @@ async function joinTeam() {
       tier: tier,
       language: language,
       about: about,
-      createdAt: new Date().toISOString()
+      createdAt: new Date()
     });
-      
-     localStorage.setItem("myProfile",                 JSON.stringify({
-  name: playerName.value,
-  bgmi: bgmiId.value,
-  role: role.value,
-  tier: tier.value,
-  language: language.value,
-  about: aboutPlayer.value
-})); 
 
-    alert("Profile added successfully! 🔥");
+    localStorage.setItem("myProfile", JSON.stringify({
+      name: name,
+      bgmi: bgmi,
+      role: role,
+      tier: tier,
+      language: language,
+      about: about
+    }));
+
+    document.getElementById("profileForm").style.display = "none";
+    document.getElementById("profileCreatedMessage").style.display = "block";
 
     document.getElementById("playerName").value = "";
     document.getElementById("bgmiId").value = "";
@@ -462,36 +512,42 @@ async function joinTeam() {
     document.getElementById("language").value = "";
     document.getElementById("aboutPlayer").value = "";
 
+    alert("🔥 Profile created successfully!");
+
     loadPlayers();
 
   } catch (error) {
 
     console.error(error);
-    alert("Firebase error: " + error.message);
+    alert("Error creating profile: " + error.message);
 
   }
 }
 
 
+/* =====================================================
+   LOAD PLAYERS
+   ===================================================== */
+
 async function loadPlayers() {
 
-  const list = document.getElementById("playerList");
-
-  list.innerHTML = "<p>Loading players...</p>";
+  const playerList = document.getElementById("playerList");
 
   try {
 
-    const snapshot =
-      await getDocs(collection(db, "players"));
+    const querySnapshot = await getDocs(
+      collection(db, "players")
+    );
 
-    if (snapshot.empty) {
-      list.innerHTML = "<p>No players joined yet.</p>";
+    if (querySnapshot.empty) {
+      playerList.innerHTML =
+        "<p>No players joined yet.</p>";
       return;
     }
 
-    list.innerHTML = "";
+    playerList.innerHTML = "";
 
-    snapshot.forEach((doc) => {
+    querySnapshot.forEach((doc) => {
 
       const player = doc.data();
 
@@ -500,21 +556,21 @@ async function loadPlayers() {
       div.className = "player";
 
       div.innerHTML = `
+        <h3>${player.name}</h3>
 
-  <h3>🎮 ${player.name}</h3>
+        <span class="badge">${player.role}</span>
+        <span class="badge">${player.tier}</span>
+        <span class="badge">${player.language}</span>
 
-  <span class="badge">🎯 ${player.role}</span>
-  <span class="badge">🏆 ${player.tier}</span>
-  <span class="badge">🌐 ${player.language || "N/A"}</span>
+        <p><strong>BGMI ID:</strong> ${player.bgmi}</p>
 
-  <p><strong>BGMI ID:</strong> ${player.bgmi}</p>
+        <p>
+          <strong>About:</strong>
+          ${player.about || "No information provided."}
+        </p>
+      `;
 
-  <p><strong>About:</strong><br>
-  ${player.about || "No description provided."}</p>
-
-`;
-
-      list.appendChild(div);
+      playerList.appendChild(div);
 
     });
 
@@ -522,70 +578,118 @@ async function loadPlayers() {
 
     console.error(error);
 
-    list.innerHTML =
+    playerList.innerHTML =
       "<p>Unable to load players.</p>";
 
   }
 }
 
 
-document
-  .getElementById("joinButton")
-  .addEventListener("click", joinTeam);
+/* =====================================================
+   SEARCH PLAYERS
+   ===================================================== */
 
-document.getElementById("searchPlayers").addEventListener("input", function() {
+document.getElementById("searchPlayers")
+.addEventListener("input", function () {
+
   const search = this.value.toLowerCase();
 
-  const players = document.querySelectorAll(".player");
+  const players =
+    document.querySelectorAll(".player");
 
   players.forEach(function(player) {
-    const text = player.innerText.toLowerCase();
+
+    const text =
+      player.innerText.toLowerCase();
 
     if (text.includes(search)) {
       player.style.display = "block";
     } else {
       player.style.display = "none";
     }
-  });
-}
 
-const savedProfile = JSON.parse(localStorage.getItem("myProfile"));
+  });
+
+});
+
+
+/* =====================================================
+   LOAD MY PROFILE
+   ===================================================== */
+
+const savedProfile =
+  localStorage.getItem("myProfile");
 
 if (savedProfile) {
 
+  const profile =
+    JSON.parse(savedProfile);
+
   document.getElementById("profileName").textContent =
-    savedProfile.name;
+    profile.name;
 
   document.getElementById("profileBgmi").textContent =
-    savedProfile.bgmi;
+    profile.bgmi;
 
   document.getElementById("profileRole").textContent =
-    savedProfile.role;
+    profile.role;
 
   document.getElementById("profileTier").textContent =
-    savedProfile.tier;
+    profile.tier;
 
   document.getElementById("profileLanguage").textContent =
-    savedProfile.language;
+    profile.language;
 
-  document.getElementById("profileForm").style.display = "none";
+  document.getElementById("profileForm").style.display =
+    "none";
 
   document.getElementById("profileCreatedMessage").style.display =
     "block";
 }
 
-document.getElementById("profileButton").addEventListener("click", function() {
 
-  document.getElementById("profilePanel").style.display = "block";
+/* =====================================================
+   PROFILE BUTTON
+   ===================================================== */
+
+document.getElementById("profileButton")
+.addEventListener("click", function () {
+
+  document.getElementById("profilePanel")
+    .style.display = "block";
 
 });
 
-document.getElementById("closeProfile").addEventListener("click", function() {
 
-  document.getElementById("profilePanel").style.display = "none";
+/* =====================================================
+   CLOSE PROFILE
+   ===================================================== */
+
+document.getElementById("closeProfile")
+.addEventListener("click", function () {
+
+  document.getElementById("profilePanel")
+    .style.display = "none";
 
 });
 
+
+/* =====================================================
+   VIEW MY PROFILE
+   ===================================================== */
+
+document.getElementById("viewMyProfile")
+.addEventListener("click", function () {
+
+  document.getElementById("profilePanel")
+    .style.display = "block";
+
+});
+
+
+/* =====================================================
+   START
+   ===================================================== */
 
 loadPlayers();
 
