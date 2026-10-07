@@ -245,7 +245,19 @@
   </button>
 
 </header>
+<div id="profilePanel" class="profile-panel">
 
+  <h2>👤 My Profile</h2>
+
+  <p><strong>IGN:</strong> <span id="profileName">Not set</span></p>
+  <p><strong>BGMI ID:</strong> <span id="profileBgmi">Not set</span></p>
+  <p><strong>Role:</strong> <span id="profileRole">Not set</span></p>
+  <p><strong>Tier:</strong> <span id="profileTier">Not set</span></p>
+  <p><strong>Language:</strong> <span id="profileLanguage">Not set</span></p>
+
+  <button type="button" id="closeProfile">Close</button>
+
+</div>
 <nav>
   <a href="#home">Home</a>
   <a href="#find">Find Teammates</a>
@@ -371,7 +383,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
 
 async function joinTeam() {
 
