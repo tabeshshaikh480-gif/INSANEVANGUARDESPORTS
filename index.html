@@ -285,6 +285,32 @@
 
 <script type="module">
 
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs
+} from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDhwR5Wk7_odWgLUyqKEtS5BS-22vBFGuI",
+  authDomain: "insanevanguardesports.firebaseapp.com",
+  projectId: "insanevanguardesports",
+  storageBucket: "insanevanguardesports.firebasestorage.app",
+  messagingSenderId: "997549369698",
+  appId: "1:997549369698:web:cdd921cf8510bb0fa6643b"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
 async function joinTeam() {
 
   const name = document.getElementById("playerName").value.trim();
@@ -294,19 +320,14 @@ async function joinTeam() {
   const language = document.getElementById("language").value;
   const about = document.getElementById("aboutPlayer").value.trim();
 
-
   if (!name || !bgmi || !role || !tier) {
-
     alert("Please fill Player Name, BGMI ID, Role and Tier.");
-
     return;
   }
-
 
   try {
 
     await addDoc(collection(db, "players"), {
-
       name: name,
       bgmi: bgmi,
       role: role,
@@ -314,9 +335,7 @@ async function joinTeam() {
       language: language,
       about: about,
       createdAt: new Date().toISOString()
-
     });
-
 
     alert("Profile added successfully! 🔥");
 
@@ -332,11 +351,9 @@ async function joinTeam() {
   } catch (error) {
 
     console.error(error);
-
     alert("Firebase error: " + error.message);
 
   }
-
 }
 
 
@@ -346,25 +363,17 @@ async function loadPlayers() {
 
   list.innerHTML = "<p>Loading players...</p>";
 
-
   try {
 
     const snapshot =
       await getDocs(collection(db, "players"));
 
-
     if (snapshot.empty) {
-
-      list.innerHTML =
-        "<p>No players joined yet.</p>";
-
+      list.innerHTML = "<p>No players joined yet.</p>";
       return;
-
     }
 
-
     list.innerHTML = "";
-
 
     snapshot.forEach((doc) => {
 
@@ -374,28 +383,18 @@ async function loadPlayers() {
 
       div.className = "player";
 
-
       div.innerHTML = `
-
         <h3>${player.name}</h3>
-
         <p>🎮 BGMI ID: ${player.bgmi}</p>
-
         <p>🎯 Role: ${player.role}</p>
-
         <p>🏆 Tier: ${player.tier}</p>
-
         <p>🌐 Language: ${player.language || "Not specified"}</p>
-
         <p>📝 ${player.about || "No description provided."}</p>
-
       `;
-
 
       list.appendChild(div);
 
     });
-
 
   } catch (error) {
 
@@ -405,22 +404,16 @@ async function loadPlayers() {
       "<p>Unable to load players.</p>";
 
   }
-
 }
 
 
-document.getElementById("joinButton").addEventListener("click", joinTeam);
+document
+  .getElementById("joinButton")
+  .addEventListener("click", joinTeam);
+
 
 loadPlayers();
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDhwR5Wk7_odWgLUyqKEtS5BS-22vBFGuI",
-  authDomain: "insanevanguardesports.firebaseapp.com",
-  projectId: "insanevanguardesports",
-  storageBucket: "insanevanguardesports.firebasestorage.app",
-  messagingSenderId: "997549369698",
-  appId: "1:997549369698:web:cdd921cf8510bb0fa6643b"
-};
 </script>
 
 
