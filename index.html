@@ -49,7 +49,26 @@
     right: 12px;
   }
 }
-    
+    .profile-photo-section {
+  margin: 15px 0;
+}
+
+.profile-photo-section label {
+  display: block;
+  color: #ff3c00;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.profile-photo-section input {
+  width: 100%;
+  padding: 10px;
+  background: #151515;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 8px;
+}
+
     html {
       scroll-behavior: smooth;
     }
@@ -317,6 +336,18 @@
       <option>Marathi</option>
       <option>Hinglish</option>
     </select>
+    
+     <div class="profile-photo-section">
+
+  <label for="profilePhoto">Profile Photo</label>
+
+  <input
+    type="file"
+    id="profilePhoto"
+    accept="image/*"
+  >
+
+</div>
 
     <textarea
       id="aboutPlayer"
@@ -324,7 +355,7 @@
       placeholder="Tell us about yourself"
     ></textarea>
 
-    <button type="button" id="joinButton">JOIN TEAM FINDER</button>
+    <button type="button" id="joinButton">CREATE MY PROFILE 🔥</button>
 
   </div>
 </section>
