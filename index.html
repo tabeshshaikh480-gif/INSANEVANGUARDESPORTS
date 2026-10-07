@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>INSANE VANGUARD ESPORTS</title>
 
   <style>
@@ -10,6 +11,10 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -20,41 +25,48 @@
 
     header {
       background: #111;
-      padding: 18px;
+      padding: 20px;
       text-align: center;
       border-bottom: 2px solid #ff3c00;
     }
 
     header h1 {
       color: #ff3c00;
-      font-size: 24px;
+      font-size: 25px;
     }
 
     header p {
       color: #aaa;
-      margin-top: 5px;
+      margin-top: 6px;
     }
 
     nav {
       padding: 15px;
       text-align: center;
       background: #151515;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      margin: 0 10px;
+      margin: 0 8px;
       font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ff3c00;
     }
 
     .hero {
       text-align: center;
-      padding: 70px 20px;
+      padding: 80px 20px;
     }
 
     .hero h2 {
-      font-size: 42px;
+      font-size: 44px;
       margin-bottom: 15px;
     }
 
@@ -64,7 +76,8 @@
 
     .hero p {
       color: #bbb;
-      margin-bottom: 25px;
+      margin-bottom: 28px;
+      font-size: 17px;
     }
 
     .button {
@@ -80,7 +93,11 @@
     section {
       max-width: 900px;
       margin: auto;
-      padding: 40px 20px;
+      padding: 45px 20px;
+    }
+
+    section h2 {
+      margin-bottom: 10px;
     }
 
     .card {
@@ -91,7 +108,9 @@
       border: 1px solid #292929;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       width: 100%;
       padding: 13px;
       margin: 8px 0 15px;
@@ -99,6 +118,11 @@
       color: white;
       border: 1px solid #444;
       border-radius: 7px;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
     }
 
     button {
@@ -110,6 +134,30 @@
       border-radius: 7px;
       font-size: 16px;
       font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff5a26;
+    }
+
+    .player {
+      background: #0d0d0d;
+      border: 1px solid #333;
+      border-left: 4px solid #ff3c00;
+      padding: 18px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    .player h3 {
+      color: #ff3c00;
+      margin-bottom: 10px;
+    }
+
+    .player p {
+      color: #ccc;
+      margin: 5px 0;
     }
 
     footer {
@@ -126,8 +174,8 @@
       }
 
       nav a {
-        margin: 0 5px;
-        font-size: 14px;
+        margin: 0 4px;
+        font-size: 13px;
       }
     }
   </style>
@@ -143,62 +191,39 @@
 <nav>
   <a href="#home">Home</a>
   <a href="#find">Find Teammates</a>
+  <a href="#players">Players</a>
   <a href="#about">About</a>
 </nav>
 
 <section class="hero" id="home">
   <h2>FIND YOUR <span>SQUAD</span></h2>
-  <p>Connect with BGMI players and build your ultimate esports team.</p>
+
+  <p>
+    Connect with BGMI players and build your ultimate esports team.
+  </p>
+
   <a class="button" href="#find">Find Teammates</a>
 </section>
 
-<div class="card">
-  <input id="playerName" type="text" placeholder="Player Name / IGN">
-
-  <input id="bgmiId" type="text" placeholder="BGMI ID">
-
-  <select id="role">
-    <option value="">Select Role</option>
-    <option>IGL</option>
-    <option>Assaulter</option>
-    <option>Support</option>
-    <option>Sniper</option>
-    <option>Entry Fragger</option>
-  </select>
-
-  <select id="tier">
-    <option value="">Select Tier</option>
-    <option>Conqueror</option>
-    <option>Ace Master</option>
-    <option>Ace Dominator</option>
-    <option>Ace</option>
-    <option>Crown</option>
-  </select>
-
-  <select id="language">
-    <option value="">Select Language</option>
-    <option>Hindi</option>
-    <option>English</option>
-    <option>Marathi</option>
-    <option>Hinglish</option>
-  </select>
-
-  <textarea id="aboutPlayer" rows="4"
-    placeholder="Tell us about yourself"></textarea>
-
-  <button type="button" onclick="joinTeam()">
-    JOIN TEAM FINDER
-  </button>
-</div>
+<section id="find">
   <h2>Find Your Teammate</h2>
 
   <div class="card">
-    <input type="text" placeholder="Player Name / IGN">
 
-    <input type="text" placeholder="BGMI ID">
+    <input
+      id="playerName"
+      type="text"
+      placeholder="Player Name / IGN"
+    >
 
-    <select>
-      <option>Select Role</option>
+    <input
+      id="bgmiId"
+      type="text"
+      placeholder="BGMI ID"
+    >
+
+    <select id="role">
+      <option value="">Select Role</option>
       <option>IGL</option>
       <option>Assaulter</option>
       <option>Support</option>
@@ -206,8 +231,8 @@
       <option>Entry Fragger</option>
     </select>
 
-    <select>
-      <option>Select Tier</option>
+    <select id="tier">
+      <option value="">Select Tier</option>
       <option>Conqueror</option>
       <option>Ace Master</option>
       <option>Ace Dominator</option>
@@ -215,19 +240,27 @@
       <option>Crown</option>
     </select>
 
-    <select>
-      <option>Select Language</option>
+    <select id="language">
+      <option value="">Select Language</option>
       <option>Hindi</option>
       <option>English</option>
       <option>Marathi</option>
       <option>Hinglish</option>
     </select>
 
-    <textarea rows="4" placeholder="Tell us about yourself"></textarea>
+    <textarea
+      id="aboutPlayer"
+      rows="4"
+      placeholder="Tell us about yourself"
+    ></textarea>
 
-    <button type="button" onclick="joinTeam()">JOIN TEAM FINDER</button>
+    <button type="button" onclick="joinTeam()">
+      JOIN TEAM FINDER
+    </button>
+
   </div>
 </section>
+
 <section id="players">
   <h2>Players</h2>
 
@@ -235,6 +268,7 @@
     <p>No players joined yet.</p>
   </div>
 </section>
+
 <section id="about">
   <h2>About INSANE VANGUARD</h2>
 
@@ -252,48 +286,119 @@
 </footer>
 
 <script>
+
 function joinTeam() {
-  const name = document.getElementById("playerName").value.trim();
-  const bgmi = document.getElementById("bgmiId").value.trim();
-  const role = document.getElementById("role").value;
-  const tier = document.getElementById("tier").value;
+
+  const name =
+    document.getElementById("playerName").value.trim();
+
+  const bgmi =
+    document.getElementById("bgmiId").value.trim();
+
+  const role =
+    document.getElementById("role").value;
+
+  const tier =
+    document.getElementById("tier").value;
+
+  const language =
+    document.getElementById("language").value;
+
+  const about =
+    document.getElementById("aboutPlayer").value.trim();
+
 
   if (!name || !bgmi || !role || !tier) {
-    alert("Please fill Player Name, BGMI ID, Role and Tier.");
+
+    alert(
+      "Please fill Player Name, BGMI ID, Role and Tier."
+    );
+
     return;
   }
 
+
   const player = {
+
     name: name,
+
     bgmi: bgmi,
+
     role: role,
-    tier: tier
+
+    tier: tier,
+
+    language: language,
+
+    about: about
+
   };
 
-  localStorage.setItem("ivPlayer", JSON.stringify(player));
+
+  localStorage.setItem(
+    "ivPlayer",
+    JSON.stringify(player)
+  );
+
 
   showPlayer();
 
-  alert("Profile saved successfully! 🔥");
+
+  alert(
+    "Profile saved successfully! 🔥"
+  );
+
 }
+
 
 function showPlayer() {
-  const saved = localStorage.getItem("ivPlayer");
-  const list = document.getElementById("playerList");
 
-  if (!saved) return;
+  const saved =
+    localStorage.getItem("ivPlayer");
 
-  const player = JSON.parse(saved);
+  const list =
+    document.getElementById("playerList");
+
+
+  if (!saved) {
+
+    list.innerHTML =
+      "<p>No players joined yet.</p>";
+
+    return;
+
+  }
+
+
+  const player =
+    JSON.parse(saved);
+
 
   list.innerHTML = `
-    <h3>${player.name}</h3>
-    <p>🎮 BGMI ID: ${player.bgmi}</p>
-    <p>🎯 Role: ${player.role}</p>
-    <p>🏆 Tier: ${player.tier}</p>
+
+    <div class="player">
+
+      <h3>${player.name}</h3>
+
+      <p>🎮 BGMI ID: ${player.bgmi}</p>
+
+      <p>🎯 Role: ${player.role}</p>
+
+      <p>🏆 Tier: ${player.tier}</p>
+
+      <p>🌐 Language: ${player.language || "Not specified"}</p>
+
+      <p>📝 ${player.about || "No description provided."}</p>
+
+    </div>
+
   `;
+
 }
 
+
 showPlayer();
+
 </script>
 
 </body>
