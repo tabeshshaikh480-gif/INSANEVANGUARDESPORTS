@@ -409,6 +409,15 @@ async function joinTeam() {
       about: about,
       createdAt: new Date().toISOString()
     });
+      
+     localStorage.setItem("myProfile",                 JSON.stringify({
+  name: playerName.value,
+  bgmi: bgmiId.value,
+  role: role.value,
+  tier: tier.value,
+  language: language.value,
+  about: aboutPlayer.value
+})); 
 
     alert("Profile added successfully! 🔥");
 
@@ -505,6 +514,16 @@ document.getElementById("searchPlayers").addEventListener("input", function() {
     }
   });
 });
+
+ const savedProfile = JSON.parse(localStorage.getItem("myProfile"));
+
+if (savedProfile) {
+  document.getElementById("profileName").textContent = savedProfile.name;
+  document.getElementById("profileBgmi").textContent = savedProfile.bgmi;
+  document.getElementById("profileRole").textContent = savedProfile.role;
+  document.getElementById("profileTier").textContent = savedProfile.tier;
+  document.getElementById("profileLanguage").textContent = savedProfile.language;
+}
 
 loadPlayers();
 
