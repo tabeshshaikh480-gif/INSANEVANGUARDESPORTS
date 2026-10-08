@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Find Teammates | InsaneVanguard</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b0b0f;
+    color: white;
+}
+
+header {
+    padding: 18px;
+    text-align: center;
+    background: #111118;
+    border-bottom: 1px solid #292929;
+}
+
+h1 {
+    margin: 0;
+    color: #ffc400;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background: #15151c;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    background: #ffc400;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.player {
+    background: #15151c;
+    padding: 18px;
+    margin-top: 15px;
+    border-radius: 12px;
+    border: 1px solid #292929;
+}
+
+.player h3 {
+    margin-top: 0;
+}
+
+.rank {
+    color: #ffc400;
+}
+
+.back {
+    background: #22222a;
+    color: white;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>INSANEVANGUARD</h1>
+    <p>Find Your Squad 🎮</p>
+</header>
+
+<div class="container">
+
+    <button class="back"
+            onclick="location.href='index.html'">
+        ← Back to Home
+    </button>
+
+    <h2>🔎 Find Teammates</h2>
+
+    <input
+        id="search"
+        type="text"
+        placeholder="Search player name">
+
+    <select id="role">
+        <option value="">All Roles</option>
+        <option value="IGL">IGL</option>
+        <option value="Entry">Entry</option>
+        <option value="Support">Support</option>
+        <option value="Sniper">Sniper</option>
+    </select>
+
+    <button onclick="findPlayers()">
+        Find Players
+    </button>
+
+    <div id="results"></div>
+
+</div>
+
+<script>
+
+const players = [
+    {
+        name: "VanguardX",
+        role: "IGL",
+        rank: "Conqueror",
+        kd: "4.8"
+    },
+    {
+        name: "ShadowOP",
+        role: "Entry",
+        rank: "Ace Master",
+        kd: "5.2"
+    },
+    {
+        name: "ClutchKing",
+        role: "Support",
+        rank: "Ace",
+        kd: "3.9"
+    },
+    {
+        name: "SniperSoul",
+        role: "Sniper",
+        rank: "Ace Dominator",
+        kd: "4.5"
+    }
+];
+
+function findPlayers() {
+
+    const search =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const role =
+        document.getElementById("role")
+        .value;
+
+    const results =
+        document.getElementById("results");
+
+    const found =
+        players.filter(player => {
+
+            return (
+                player.name
+                    .toLowerCase()
+                    .includes(search)
+                &&
+                (role === "" ||
+                 player.role === role)
+            );
+
+        });
+
+    if (found.length === 0) {
+
+        results.innerHTML =
+            "<p>No players found.</p>";
+
+        return;
+    }
+
+    results.innerHTML =
+        found.map(player => `
+
+        <div class="player">
+
+            <h3>👤 ${player.name}</h3>
+
+            <p>🎯 Role: ${player.role}</p>
+
+            <p class="rank">
+                🏆 ${player.rank}
+            </p>
+
+            <p>📊 K/D: ${player.kd}</p>
+
+            <button onclick="alert(
+                'Team request sent to ${player.name}!'
+            )">
+                🤝 Request Team
+            </button>
+
+        </div>
+
+        `).join("");
+
+}
+
+</script>
+
+</body>
+</html>
