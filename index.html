@@ -1,2168 +1,1066 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>INSANE VANGUARD ESPORTS</title>
+  <title>INSANE VANGUARD ESPORTS</title>
 
-<style>
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      font-family:Arial, sans-serif;
+    }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+    body{
+      background:#080b12;
+      color:#fff;
+    }
 
-body{
-  font-family:Arial,sans-serif;
-  background:#070707;
-  color:white;
-}
+    header{
+      background:linear-gradient(135deg,#111827,#1e293b);
+      padding:20px;
+      text-align:center;
+      border-bottom:2px solid #ff3b30;
+    }
 
-header{
-  background:#111;
-  padding:20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:2px solid #ff7a00;
-}
+    header h1{
+      color:#ff3b30;
+      font-size:28px;
+      margin-bottom:6px;
+    }
 
-header h1{
-  color:#ff7a00;
-  font-size:22px;
-}
+    header p{
+      color:#aaa;
+    }
 
-header p{
-  color:#aaa;
-  margin-top:5px;
-}
+    nav{
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      padding:10px;
+      background:#0d111a;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
 
-.profile-button,
-button,
-.button{
-  background:#ff7a00;
-  color:white;
-  border:0;
-  padding:12px 18px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
+    nav button{
+      background:#171d29;
+      color:#fff;
+      border:1px solid #303949;
+      padding:10px 14px;
+      border-radius:8px;
+      white-space:nowrap;
+      cursor:pointer;
+    }
 
-button{
-  margin-top:10px;
-}
+    nav button:hover{
+      background:#ff3b30;
+    }
 
-.green{
-  background:#159447;
-}
+    .container{
+      max-width:1100px;
+      margin:auto;
+      padding:20px;
+    }
 
-.red{
-  background:#c62828;
-}
+    .section{
+      display:none;
+    }
 
-.action-row{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
+    .section.active{
+      display:block;
+    }
 
-nav{
-  background:#151515;
-  padding:12px;
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-}
+    .hero{
+      text-align:center;
+      padding:45px 20px;
+      background:linear-gradient(135deg,#111827,#151923);
+      border-radius:15px;
+      margin-bottom:20px;
+    }
 
-nav a{
-  color:white;
-  text-decoration:none;
-  padding:8px 12px;
-  white-space:nowrap;
-}
+    .hero h2{
+      font-size:38px;
+      color:#ff3b30;
+      margin-bottom:12px;
+    }
 
-.hero{
-  text-align:center;
-  padding:70px 20px;
-  background:linear-gradient(#111,#070707);
-}
+    .hero p{
+      color:#bbb;
+      margin-bottom:20px;
+    }
 
-.hero h2{
-  font-size:40px;
-}
+    .btn{
+      background:#ff3b30;
+      color:#fff;
+      border:none;
+      padding:12px 18px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:bold;
+    }
 
-.hero span{
-  color:#ff7a00;
-}
+    .btn:hover{
+      background:#e62e25;
+    }
 
-.hero p{
-  color:#bbb;
-  margin:15px 0 25px;
-}
+    .btn.secondary{
+      background:#293241;
+    }
 
-section{
-  max-width:900px;
-  margin:auto;
-  padding:45px 18px;
-}
+    .btn.danger{
+      background:#9f1239;
+    }
 
-section h2{
-  color:#ff7a00;
-  margin-bottom:20px;
-}
+    .card{
+      background:#111722;
+      border:1px solid #293241;
+      border-radius:12px;
+      padding:18px;
+      margin-bottom:15px;
+    }
 
-.card,
-.player,
-.squad,
-.request,
-.notification{
-  background:#151515;
-  padding:20px;
-  margin:12px 0;
-  border-radius:12px;
-  border:1px solid #292929;
-}
+    .card h3{
+      color:#ff3b30;
+      margin-bottom:10px;
+    }
 
-.notification.unread{
-  border-left:4px solid #ff7a00;
-  background:#1c1c1c;
-}
+    .form-group{
+      margin-bottom:14px;
+    }
 
-.notification.read{
-  opacity:.65;
-}
+    label{
+      display:block;
+      margin-bottom:6px;
+      color:#ccc;
+    }
 
-.notification-title{
-  font-size:17px;
-  font-weight:bold;
-  margin-bottom:8px;
-}
+    input,
+    select,
+    textarea{
+      width:100%;
+      background:#080d15;
+      border:1px solid #303949;
+      color:#fff;
+      padding:12px;
+      border-radius:8px;
+      outline:none;
+    }
 
-.notification-time{
-  color:#888;
-  font-size:12px;
-  margin-top:10px;
-}
+    textarea{
+      min-height:100px;
+      resize:vertical;
+    }
 
-input,
-select,
-textarea{
-  width:100%;
-  padding:13px;
-  margin:7px 0;
-  background:#0c0c0c;
-  color:white;
-  border:1px solid #333;
-  border-radius:7px;
-}
+    input:focus,
+    select:focus,
+    textarea:focus{
+      border-color:#ff3b30;
+    }
 
-.empty{
-  color:#888;
-  text-align:center;
-  padding:15px;
-}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:15px;
+    }
 
-.profile-panel{
-  display:none;
-  position:fixed;
-  top:70px;
-  right:15px;
-  width:300px;
-  max-width:90%;
-  background:#151515;
-  border:2px solid #ff7a00;
-  border-radius:12px;
-  padding:20px;
-  z-index:1000;
-  box-shadow:0 10px 30px #000;
-}
+    .profile-info{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:10px;
+      margin-top:15px;
+    }
 
-.profile-panel h2{
-  color:#ff7a00;
-  margin-bottom:15px;
-}
+    .info-box{
+      background:#080d15;
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #293241;
+    }
 
-.profile-panel p{
-  margin:10px 0;
-}
+    .info-box strong{
+      display:block;
+      color:#ff3b30;
+      margin-bottom:4px;
+    }
 
-.notification-button{
-  position:relative;
-  margin-right:8px;
-}
+    .search{
+      margin-bottom:20px;
+    }
 
-.notification-count{
-  position:absolute;
-  top:-7px;
-  right:-7px;
-  background:#e53935;
-  color:white;
-  font-size:11px;
-  min-width:20px;
-  height:20px;
-  border-radius:50%;
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
+    .empty{
+      text-align:center;
+      color:#888;
+      padding:30px;
+    }
 
-.header-actions{
-  display:flex;
-  align-items:center;
-}
+    .team-code{
+      display:inline-block;
+      background:#ff3b30;
+      padding:8px 12px;
+      border-radius:7px;
+      font-weight:bold;
+      letter-spacing:2px;
+      margin:8px 0;
+    }
 
-@media(max-width:600px){
+    .copy-btn{
+      margin-left:5px;
+      padding:8px 10px;
+      border:none;
+      border-radius:7px;
+      background:#293241;
+      color:#fff;
+      cursor:pointer;
+    }
 
-  header h1{
-    font-size:17px;
-  }
+    .member-list{
+      margin-top:12px;
+    }
 
-  header p{
-    font-size:12px;
-  }
+    .member{
+      background:#080d15;
+      border:1px solid #293241;
+      padding:10px;
+      border-radius:8px;
+      margin-bottom:7px;
+    }
 
-  .profile-button,
-  .notification-button{
-    padding:9px;
-    font-size:12px;
-  }
+    .member small{
+      color:#999;
+    }
 
-  .hero h2{
-    font-size:30px;
-  }
+    .badge{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:5px;
+      background:#293241;
+      font-size:12px;
+      margin:2px;
+    }
 
-}
+    .badge.owner{
+      background:#ff3b30;
+    }
 
-</style>
+    .badge.manager{
+      background:#7c3aed;
+    }
+
+    .badge.main{
+      background:#2563eb;
+    }
+
+    .badge.optional{
+      background:#059669;
+    }
+
+    .notification{
+      padding:12px;
+      border:1px solid #293241;
+      border-radius:8px;
+      background:#111722;
+      margin-bottom:8px;
+    }
+
+    .notification.unread{
+      border-color:#ff3b30;
+    }
+
+    .status{
+      padding:5px 9px;
+      border-radius:5px;
+      font-size:12px;
+      display:inline-block;
+    }
+
+    .status.pending{
+      background:#92400e;
+    }
+
+    .status.accepted{
+      background:#166534;
+    }
+
+    .status.rejected{
+      background:#991b1b;
+    }
+
+    .chat-box{
+      background:#080d15;
+      border:1px solid #293241;
+      border-radius:10px;
+      height:400px;
+      overflow-y:auto;
+      padding:12px;
+      margin-bottom:10px;
+    }
+
+    .chat-message{
+      margin-bottom:12px;
+      padding:10px;
+      background:#111722;
+      border-radius:8px;
+    }
+
+    .chat-message strong{
+      color:#ff3b30;
+    }
+
+    .chat-message small{
+      color:#777;
+      display:block;
+      margin-top:4px;
+    }
+
+    .chat-input{
+      display:flex;
+      gap:8px;
+    }
+
+    .chat-input input{
+      flex:1;
+    }
+
+    .warning{
+      background:#3b1d1d;
+      border:1px solid #7f1d1d;
+      padding:12px;
+      border-radius:8px;
+      margin-bottom:15px;
+      color:#fecaca;
+    }
+
+    .success{
+      background:#12351f;
+      border:1px solid #166534;
+      padding:12px;
+      border-radius:8px;
+      margin-bottom:15px;
+      color:#bbf7d0;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px;
+      color:#666;
+    }
+
+    @media(max-width:600px){
+      .hero h2{
+        font-size:28px;
+      }
+
+      .container{
+        padding:12px;
+      }
+
+      .chat-input{
+        flex-direction:column;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-
-  <div>
-    <h1>INSANE VANGUARD ESPORTS</h1>
-    <p>BGMI Esports Community</p>
-  </div>
-
-  <div class="header-actions">
-
-    <button
-      class="notification-button"
-      id="notificationButton">
-
-      🔔
-
-      <span
-        id="notificationCount"
-        class="notification-count">
-        0
-      </span>
-
-    </button>
-
-    <button
-      class="profile-button"
-      id="profileButton">
-
-      👤 Profile
-
-    </button>
-
-  </div>
-
+  <h1>INSANE VANGUARD ESPORTS</h1>
+  <p>BGMI Esports Community</p>
 </header>
 
-
 <nav>
-
-  <a href="#home">Home</a>
-  <a href="#find">Profile</a>
-  <a href="#players">Players</a>
-  <a href="#squads">Find Squad</a>
-  <a href="#makeSquad">Make Squad</a>
-  <a href="#requests">Requests</a>
-  <a href="#notifications">Notifications 🔔</a>
-
+  <button onclick="showSection('home')">🏠 Home</button>
+  <button onclick="showSection('profile')">👤 Profile</button>
+  <button onclick="showSection('players')">👥 Players</button>
+  <button onclick="showSection('findTeam')">🔎 Find Team</button>
+  <button onclick="showSection('makeTeam')">🛡️ Make Team</button>
+  <button onclick="showSection('joinCode')">🔑 Join by Code</button>
+  <button onclick="showSection('requests')">📨 Requests</button>
+  <button onclick="showSection('notifications')">🔔 Notifications</button>
+  <button onclick="showSection('chat')">💬 Chat</button>
 </nav>
 
+<div class="container">
 
-<div
-  id="profilePanel"
-  class="profile-panel">
+  <!-- HOME -->
+  <section id="home" class="section active">
 
-  <h2>👤 My Profile</h2>
+    <div class="hero">
+      <h2>BUILD YOUR TEAM</h2>
 
-  <p>
-    <b>IGN:</b>
-    <span id="profileName">Not set</span>
-  </p>
+      <p>
+        Find BGMI teammates, create your dream team
+        and compete together.
+      </p>
 
-  <p>
-    <b>BGMI ID:</b>
-    <span id="profileBgmi">Not set</span>
-  </p>
+      <button class="btn" onclick="showSection('findTeam')">
+        🔎 FIND TEAM
+      </button>
 
-  <p>
-    <b>Role:</b>
-    <span id="profileRole">Not set</span>
-  </p>
+      <button class="btn secondary" onclick="showSection('makeTeam')">
+        🛡️ MAKE YOUR DREAM TEAM
+      </button>
+    </div>
 
-  <p>
-    <b>Tier:</b>
-    <span id="profileTier">Not set</span>
-  </p>
+    <div class="grid">
 
-  <p>
-    <b>Language:</b>
-    <span id="profileLanguage">Not set</span>
-  </p>
+      <div class="card">
+        <h3>👥 Find Players</h3>
+        <p>Find BGMI players based on role, tier and language.</p>
+      </div>
 
-  <button id="closeProfile">
-    Close
-  </button>
+      <div class="card">
+        <h3>🛡️ Dream Teams</h3>
+        <p>Create a team with 1 owner, 1 manager, 4 main players and 2 optional players.</p>
+      </div>
+
+      <div class="card">
+        <h3>🔑 Team Code</h3>
+        <p>Every team gets its own unique Team Code.</p>
+      </div>
+
+      <div class="card">
+        <h3>💬 Global Chat</h3>
+        <p>Talk with other players and find teammates.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROFILE -->
+  <section id="profile" class="section">
+
+    <h2>👤 My Profile</h2>
+
+    <div id="profileDisplay"></div>
+
+    <div class="card">
+
+      <h3>Create Your Profile</h3>
+
+      <div class="warning">
+        ⚠️ One BGMI ID can have only one profile.
+      </div>
+
+      <form id="profileForm">
+
+        <div class="form-group">
+          <label>Player Name</label>
+          <input id="profileName" required>
+        </div>
+
+        <div class="form-group">
+          <label>BGMI ID</label>
+          <input id="profileBgmi" required>
+        </div>
+
+        <div class="form-group">
+          <label>Role</label>
+
+          <select id="profileRole" required>
+            <option value="">Select Role</option>
+            <option>IGL</option>
+            <option>Assaulter</option>
+            <option>Support</option>
+            <option>Sniper</option>
+            <option>Entry Fragger</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Tier</label>
+
+          <select id="profileTier" required>
+            <option value="">Select Tier</option>
+            <option>Bronze</option>
+            <option>Silver</option>
+            <option>Gold</option>
+            <option>Platinum</option>
+            <option>Diamond</option>
+            <option>Crown</option>
+            <option>Ace</option>
+            <option>Ace Master</option>
+            <option>Ace Dominator</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Language</label>
+          <input id="profileLanguage" placeholder="Hindi, English, Marathi..." required>
+        </div>
+
+        <div class="form-group">
+          <label>About You</label>
+          <textarea id="profileAbout" maxlength="500"></textarea>
+        </div>
+
+        <button class="btn" type="submit">
+          CREATE PROFILE
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <!-- PLAYERS -->
+  <section id="players" class="section">
+
+    <h2>👥 Players</h2>
+
+    <input
+      class="search"
+      id="playerSearch"
+      placeholder="Search player, BGMI ID, role or tier..."
+      oninput="loadPlayers()"
+    >
+
+    <div id="playersList"></div>
+
+  </section>
+
+
+  <!-- FIND TEAM -->
+  <section id="findTeam" class="section">
+
+    <h2>🔎 Find Team</h2>
+
+    <input
+      class="search"
+      id="teamSearch"
+      placeholder="Search team name, language, role or tier..."
+      oninput="loadTeams()"
+    >
+
+    <div id="teamsList"></div>
+
+  </section>
+
+
+  <!-- MAKE TEAM -->
+  <section id="makeTeam" class="section">
+
+    <h2>🛡️ MAKE YOUR DREAM TEAM</h2>
+
+    <div class="card">
+
+      <div class="success">
+        Team Structure:
+        <br>
+        👑 1 Owner +
+        👔 1 Manager +
+        🎮 4 Main Players +
+        🔄 2 Optional Players
+        <br><br>
+        <strong>Total: 8 Members</strong>
+      </div>
+
+      <div id="teamCreateStatus"></div>
+
+      <form id="teamForm">
+
+        <div class="form-group">
+          <label>Team Name</label>
+          <input id="teamName" maxlength="40" required>
+        </div>
+
+        <div class="form-group">
+          <label>Team Language</label>
+          <input id="teamLanguage" placeholder="Hindi, English..." required>
+        </div>
+
+        <div class="form-group">
+          <label>Required Role</label>
+
+          <select id="teamRequiredRole">
+            <option value="">Any Role</option>
+            <option>IGL</option>
+            <option>Assaulter</option>
+            <option>Support</option>
+            <option>Sniper</option>
+            <option>Entry Fragger</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Required Tier</label>
+
+          <select id="teamRequiredTier">
+            <option value="">Any Tier</option>
+            <option>Bronze</option>
+            <option>Silver</option>
+            <option>Gold</option>
+            <option>Platinum</option>
+            <option>Diamond</option>
+            <option>Crown</option>
+            <option>Ace</option>
+            <option>Ace Master</option>
+            <option>Ace Dominator</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Team Description</label>
+          <textarea
+            id="teamDescription"
+            maxlength="500"
+            placeholder="Tell players about your team..."
+          ></textarea>
+        </div>
+
+        <button class="btn" type="submit">
+          CREATE MY DREAM TEAM 🛡️
+        </button>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <!-- JOIN BY CODE -->
+  <section id="joinCode" class="section">
+
+    <h2>🔑 Join Team by Code</h2>
+
+    <div class="card">
+
+      <p style="color:#aaa;margin-bottom:15px;">
+        Enter a Team Code shared by the team owner.
+        You will send a join request to the owner.
+      </p>
+
+      <form id="joinCodeForm">
+
+        <div class="form-group">
+          <label>Team Code</label>
+
+          <input
+            id="joinTeamCode"
+            maxlength="8"
+            placeholder="Example: IV-7K4P9X"
+            style="text-transform:uppercase;"
+            required
+          >
+        </div>
+
+        <button class="btn" type="submit">
+          SEND JOIN REQUEST
+        </button>
+
+      </form>
+
+    </div>
+
+    <div id="joinCodeResult"></div>
+
+  </section>
+
+
+  <!-- REQUESTS -->
+  <section id="requests" class="section">
+
+    <h2>📨 Team Requests</h2>
+
+    <div class="card">
+
+      <h3>Incoming Requests</h3>
+
+      <div id="incomingRequests"></div>
+
+    </div>
+
+    <div class="card">
+
+      <h3>My Requests</h3>
+
+      <div id="myRequests"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- NOTIFICATIONS -->
+  <section id="notifications" class="section">
+
+    <h2>🔔 Notifications</h2>
+
+    <button class="btn secondary" onclick="markAllNotificationsRead()">
+      Mark All Read
+    </button>
+
+    <br><br>
+
+    <div id="notificationsList"></div>
+
+  </section>
+
+
+  <!-- CHAT -->
+  <section id="chat" class="section">
+
+    <h2>💬 Global Chat</h2>
+
+    <div class="card">
+
+      <div id="chatList" class="chat-box"></div>
+
+      <div class="chat-input">
+
+        <input
+          id="chatMessage"
+          maxlength="300"
+          placeholder="Write a message..."
+        >
+
+        <button class="btn" onclick="sendChatMessage()">
+          SEND
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
 
 </div>
 
-
-<section class="hero" id="home">
-
-  <h2>
-    BUILD YOUR <span>SQUAD</span>
-  </h2>
-
-  <p>
-    Find BGMI teammates, create your squad and compete together.
-  </p>
-
-  <a
-    class="button"
-    href="#squads">
-
-    🔎 FIND SQUAD
-
-  </a>
-
-</section>
-
-
-<section id="find">
-
-  <h2>MAKE YOUR PROFILE</h2>
-
-  <div
-    class="card"
-    id="profileForm">
-
-    <input
-      id="playerName"
-      type="text"
-      placeholder="Player Name / IGN">
-
-    <input
-      id="bgmiId"
-      type="text"
-      placeholder="BGMI ID">
-
-    <select id="role">
-
-      <option value="">
-        Select Role
-      </option>
-
-      <option>IGL</option>
-      <option>Assaulter</option>
-      <option>Support</option>
-      <option>Sniper</option>
-      <option>Entry Fragger</option>
-
-    </select>
-
-    <select id="tier">
-
-      <option value="">
-        Select Tier
-      </option>
-
-      <option>Conqueror</option>
-      <option>Ace Master</option>
-      <option>Ace Dominator</option>
-      <option>Ace</option>
-      <option>Crown</option>
-
-    </select>
-
-    <select id="language">
-
-      <option value="">
-        Select Language
-      </option>
-
-      <option>Hindi</option>
-      <option>English</option>
-      <option>Marathi</option>
-      <option>Hinglish</option>
-
-    </select>
-
-    <textarea
-      id="aboutPlayer"
-      rows="4"
-      placeholder="Tell us about yourself">
-    </textarea>
-
-    <button id="joinButton">
-      CREATE MY PROFILE 🔥
-    </button>
-
-  </div>
-
-
-  <div
-    id="profileCreatedMessage"
-    class="card"
-    style="display:none;">
-
-    <h2>🔥 PROFILE CREATED</h2>
-
-    <p>
-      Your BGMI profile is ready!
-    </p>
-
-    <button id="viewMyProfile">
-      VIEW MY PROFILE 👤
-    </button>
-
-  </div>
-
-</section>
-
-
-<section id="players">
-
-  <h2>👥 PLAYERS</h2>
-
-  <input
-    type="text"
-    id="searchPlayers"
-    placeholder="🔎 Search players...">
-
-  <div id="playerList">
-
-    <p class="empty">
-      Loading players...
-    </p>
-
-  </div>
-
-</section>
-
-
-<section id="squads">
-
-  <h2>🔎 FIND SQUAD</h2>
-
-  <input
-    type="text"
-    id="searchSquads"
-    placeholder="🔎 Search squad...">
-
-  <div id="squadList">
-
-    <p class="empty">
-      Loading squads...
-    </p>
-
-  </div>
-
-</section>
-
-
-<section id="makeSquad">
-
-  <h2>🛡️ MAKE YOUR SQUAD</h2>
-
-  <div class="card">
-
-    <input
-      id="squadName"
-      type="text"
-      placeholder="Squad Name">
-
-    <select id="squadRole">
-
-      <option value="">
-        Looking for Role
-      </option>
-
-      <option>IGL</option>
-      <option>Assaulter</option>
-      <option>Support</option>
-      <option>Sniper</option>
-      <option>Entry Fragger</option>
-
-    </select>
-
-    <select id="squadTier">
-
-      <option value="">
-        Required Tier
-      </option>
-
-      <option>Conqueror</option>
-      <option>Ace Master</option>
-      <option>Ace Dominator</option>
-      <option>Ace</option>
-      <option>Crown</option>
-
-    </select>
-
-    <select id="squadLanguage">
-
-      <option value="">
-        Squad Language
-      </option>
-
-      <option>Hindi</option>
-      <option>English</option>
-      <option>Marathi</option>
-      <option>Hinglish</option>
-
-    </select>
-
-    <input
-      id="squadSlots"
-      type="number"
-      min="1"
-      max="3"
-      placeholder="Players Needed">
-
-    <textarea
-      id="squadDescription"
-      rows="4"
-      placeholder="Tell players about your squad">
-    </textarea>
-
-    <button id="createSquadButton">
-      CREATE SQUAD 🛡️
-    </button>
-
-  </div>
-
-</section>
-
-
-<section id="requests">
-
-  <h2>📨 SQUAD REQUESTS</h2>
-
-  <div id="requestList">
-
-    <p class="empty">
-      Create a profile to see requests.
-    </p>
-
-  </div>
-
-</section>
-
-
-<section id="notifications">
-
-  <h2>🔔 NOTIFICATIONS</h2>
-
-  <button
-    id="markAllRead"
-    class="green">
-
-    ✓ MARK ALL AS READ
-
-  </button>
-
-  <div id="notificationList">
-
-    <p class="empty">
-      No notifications.
-    </p>
-
-  </div>
-
-</section>
+<footer>
+  © 2026 INSANE VANGUARD ESPORTS
+</footer>
 
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  where,
-  updateDoc,
-  doc,
-  getDoc,
-  orderBy
-
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import {
+    initializeApp
+  }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
-/* =====================================================
-   FIREBASE CONFIG
-   PASTE YOUR FIREBASE CONFIG HERE
-   ===================================================== */
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    getDoc,
+    doc,
+    updateDoc,
+    deleteDoc,
+    query,
+    where,
+    orderBy,
+    limit,
+    arrayUnion,
+    arrayRemove
+  }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig = {
 
-  apiKey: "YOUR_API_KEY",
+  /* =====================================================
+     FIREBASE CONFIG
+     ===================================================== */
 
-  authDomain:
-    "YOUR_PROJECT.firebaseapp.com",
-
-  projectId:
-    "YOUR_PROJECT_ID",
-
-  storageBucket:
-    "YOUR_PROJECT.firebasestorage.app",
-
-  messagingSenderId:
-    "YOUR_SENDER_ID",
-
-  appId:
-    "YOUR_APP_ID"
-
+   const firebaseConfig = {
+  apiKey: "AIzaSyDhwR5Wk7_odWgLUyqKEtS5BS-22vBFGuI",
+  authDomain: "insanevanguardesports.firebaseapp.com",
+  projectId: "insanevanguardesports",
+  storageBucket: "insanevanguardesports.firebasestorage.app",
+  messagingSenderId: "997549369698",
+  appId: "1:997549369698:web:cdd921cf8510bb0fa6643b"
 };
 
+  const app = initializeApp(firebaseConfig);
 
-/* =====================================================
-   FIREBASE
-   ===================================================== */
+  const db = getFirestore(app);
 
-const app =
-  initializeApp(firebaseConfig);
 
-const db =
-  getFirestore(app);
+  /* =====================================================
+     COLLECTIONS
+     ===================================================== */
 
+  const PLAYERS = "players";
 
-/* =====================================================
-   PROFILE
-   ===================================================== */
+  const TEAMS = "squads";
 
-function getMyProfile(){
+  const REQUESTS = "squadRequests";
 
-  return JSON.parse(
-    localStorage.getItem("myProfile")
-  );
+  const NOTIFICATIONS = "notifications";
 
-}
+  const CHAT = "chatMessages";
 
 
-function loadMyProfile(){
+  /* =====================================================
+     NAVIGATION
+     ===================================================== */
 
-  const profile =
-    getMyProfile();
+  window.showSection = function(sectionId){
 
-  if(!profile) return;
+    document
+      .querySelectorAll(".section")
+      .forEach(section => {
+        section.classList.remove("active");
+      });
 
-  document.getElementById("profileName")
-    .textContent = profile.name;
+    const section =
+      document.getElementById(sectionId);
 
-  document.getElementById("profileBgmi")
-    .textContent = profile.bgmi;
-
-  document.getElementById("profileRole")
-    .textContent = profile.role;
-
-  document.getElementById("profileTier")
-    .textContent = profile.tier;
-
-  document.getElementById("profileLanguage")
-    .textContent = profile.language;
-
-  document.getElementById("profileForm")
-    .style.display = "none";
-
-  document.getElementById("profileCreatedMessage")
-    .style.display = "block";
-
-}
-
-
-async function createProfile(){
-
-  const name =
-    document.getElementById("playerName")
-    .value.trim();
-
-  const bgmi =
-    document.getElementById("bgmiId")
-    .value.trim();
-
-  const role =
-    document.getElementById("role").value;
-
-  const tier =
-    document.getElementById("tier").value;
-
-  const language =
-    document.getElementById("language").value;
-
-  const about =
-    document.getElementById("aboutPlayer")
-    .value.trim();
-
-
-  if(
-    !name ||
-    !bgmi ||
-    !role ||
-    !tier ||
-    !language
-  ){
-
-    alert(
-      "Please fill all required fields."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await addDoc(
-      collection(db,"players"),
-      {
-
-        name,
-        bgmi,
-        role,
-        tier,
-        language,
-        about,
-
-        createdAt:
-          new Date()
-
-      }
-    );
-
-
-    const profile = {
-
-      name,
-      bgmi,
-      role,
-      tier,
-      language,
-      about
-
-    };
-
-
-    localStorage.setItem(
-      "myProfile",
-      JSON.stringify(profile)
-    );
-
-
-    loadMyProfile();
-
-    alert(
-      "🔥 Profile created successfully!"
-    );
-
-    loadPlayers();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "Firebase error: " +
-      error.message
-    );
-
-  }
-
-}
-
-
-document
-  .getElementById("joinButton")
-  .addEventListener(
-    "click",
-    createProfile
-  );
-
-
-/* =====================================================
-   PLAYERS
-   ===================================================== */
-
-async function loadPlayers(){
-
-  const list =
-    document.getElementById("playerList");
-
-  try{
-
-    const snapshot =
-      await getDocs(
-        collection(db,"players")
-      );
-
-    list.innerHTML = "";
-
-
-    if(snapshot.empty){
-
-      list.innerHTML =
-        '<p class="empty">No players joined yet.</p>';
-
-      return;
-
+    if(section){
+      section.classList.add("active");
     }
 
 
-    snapshot.forEach(item => {
+    if(sectionId === "players"){
+      loadPlayers();
+    }
 
-      const p =
-        item.data();
+    if(sectionId === "findTeam"){
+      loadTeams();
+    }
 
-      const div =
-        document.createElement("div");
+    if(sectionId === "profile"){
+      loadMyProfile();
+    }
 
-      div.className =
-        "player";
+    if(sectionId === "makeTeam"){
+      checkTeamCreationStatus();
+    }
 
-      div.innerHTML = `
+    if(sectionId === "requests"){
+      loadRequests();
+    }
 
-        <h3>
-          👤 ${p.name || "Player"}
-        </h3>
+    if(sectionId === "notifications"){
+      loadNotifications();
+    }
 
-        <p>
-          🎯 Role: ${p.role || "-"}
-        </p>
+    if(sectionId === "chat"){
+      loadChat();
+    }
 
-        <p>
-          🏆 Tier: ${p.tier || "-"}
-        </p>
+  };
 
-        <p>
-          🌐 Language: ${p.language || "-"}
-        </p>
 
-        <p>
-          🆔 BGMI ID: ${p.bgmi || "-"}
-        </p>
+  /* =====================================================
+     SECURITY / HTML ESCAPE
+     ===================================================== */
 
-        <p>
-          ${p.about || ""}
-        </p>
+  function escapeHtml(value){
 
+    if(value === undefined || value === null){
+      return "";
+    }
+
+    return String(value)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+
+  /* =====================================================
+     PROFILE
+     ===================================================== */
+
+  function getMyProfile(){
+
+    try{
+
+      return JSON.parse(
+        localStorage.getItem("myProfile")
+      );
+
+    }catch(error){
+
+      return null;
+
+    }
+
+  }
+
+
+  window.loadMyProfile = async function(){
+
+    const profile =
+      getMyProfile();
+
+    const display =
+      document.getElementById("profileDisplay");
+
+    if(!profile){
+
+      display.innerHTML = `
+        <div class="warning">
+          You don't have a profile yet.
+          Create one below.
+        </div>
       `;
 
-      list.appendChild(div);
-
-    });
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    list.innerHTML =
-      '<p class="empty">Unable to load players.</p>';
-
-  }
-
-}
-
-
-document
-  .getElementById("searchPlayers")
-  .addEventListener(
-    "input",
-    function(){
-
-      const search =
-        this.value.toLowerCase();
-
-      document
-        .querySelectorAll(".player")
-        .forEach(player => {
-
-          player.style.display =
-            player.textContent
-            .toLowerCase()
-            .includes(search)
-            ? "block"
-            : "none";
-
-        });
-
-    }
-  );
-
-
-/* =====================================================
-   CREATE SQUAD
-   ===================================================== */
-
-async function createSquad(){
-
-  const profile =
-    getMyProfile();
-
-
-  if(!profile){
-
-    alert(
-      "Please create your profile first."
-    );
-
-    return;
-
-  }
-
-
-  const name =
-    document
-      .getElementById("squadName")
-      .value.trim();
-
-  const requiredRole =
-    document
-      .getElementById("squadRole")
-      .value;
-
-  const requiredTier =
-    document
-      .getElementById("squadTier")
-      .value;
-
-  const language =
-    document
-      .getElementById("squadLanguage")
-      .value;
-
-  const slots =
-    Number(
-      document
-        .getElementById("squadSlots")
-        .value
-    );
-
-  const description =
-    document
-      .getElementById("squadDescription")
-      .value.trim();
-
-
-  if(
-    !name ||
-    !requiredRole ||
-    !requiredTier ||
-    !language ||
-    !slots
-  ){
-
-    alert(
-      "Please fill all squad fields."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    await addDoc(
-      collection(db,"squads"),
-      {
-
-        name,
-
-        leaderName:
-          profile.name,
-
-        leaderBgmi:
-          profile.bgmi,
-
-        requiredRole,
-
-        requiredTier,
-
-        language,
-
-        slots,
-
-        description,
-
-        members:[
-          profile.name
-        ],
-
-        memberCount:1,
-
-        createdAt:
-          new Date()
-
-      }
-    );
-
-
-    document.getElementById("squadName")
-      .value = "";
-
-    document.getElementById("squadRole")
-      .value = "";
-
-    document.getElementById("squadTier")
-      .value = "";
-
-    document.getElementById("squadLanguage")
-      .value = "";
-
-    document.getElementById("squadSlots")
-      .value = "";
-
-    document.getElementById("squadDescription")
-      .value = "";
-
-
-    alert(
-      "🛡️ Squad created successfully!"
-    );
-
-    loadSquads();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "Error creating squad: " +
-      error.message
-    );
-
-  }
-
-}
-
-
-document
-  .getElementById("createSquadButton")
-  .addEventListener(
-    "click",
-    createSquad
-  );
-
-
-/* =====================================================
-   FIND SQUADS
-   ===================================================== */
-
-async function loadSquads(){
-
-  const list =
-    document.getElementById("squadList");
-
-
-  try{
-
-    const snapshot =
-      await getDocs(
-        collection(db,"squads")
-      );
-
-    list.innerHTML = "";
-
-
-    if(snapshot.empty){
-
-      list.innerHTML =
-        '<p class="empty">No squads available yet.</p>';
-
       return;
 
     }
 
 
-    snapshot.forEach(item => {
+    const teamInfo =
+      await getPlayerTeam(profile.bgmi);
 
-      const s =
-        item.data();
 
-      const div =
-        document.createElement("div");
+    display.innerHTML = `
 
-      div.className =
-        "squad";
+      <div class="card">
 
+        <h3>${escapeHtml(profile.name)}</h3>
 
-      div.innerHTML = `
+        <div class="profile-info">
 
-        <h3>
-          🛡️ ${s.name}
-        </h3>
-
-        <p>
-          👑 Leader: ${s.leaderName}
-        </p>
-
-        <p>
-          🎯 Looking for: ${s.requiredRole}
-        </p>
-
-        <p>
-          🏆 Required Tier: ${s.requiredTier}
-        </p>
-
-        <p>
-          🌐 Language: ${s.language}
-        </p>
-
-        <p>
-          👥 Members: ${s.memberCount || 1}
-        </p>
-
-        <p>
-          📌 Players Needed: ${s.slots}
-        </p>
-
-        <p>
-          ${s.description || ""}
-        </p>
-
-        <button
-          onclick="sendRequest('${item.id}')">
-
-          📩 SEND JOIN REQUEST
-
-        </button>
-
-      `;
-
-      list.appendChild(div);
-
-    });
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    list.innerHTML =
-      '<p class="empty">Unable to load squads.</p>';
-
-  }
-
-}
-
-
-document
-  .getElementById("searchSquads")
-  .addEventListener(
-    "input",
-    function(){
-
-      const search =
-        this.value.toLowerCase();
-
-      document
-        .querySelectorAll(".squad")
-        .forEach(squad => {
-
-          squad.style.display =
-            squad.textContent
-            .toLowerCase()
-            .includes(search)
-            ? "block"
-            : "none";
-
-        });
-
-    }
-  );
-
-
-/* =====================================================
-   CREATE NOTIFICATION
-   ===================================================== */
-
-async function createNotification(
-  targetBgmi,
-  title,
-  message,
-  type
-){
-
-  try{
-
-    await addDoc(
-      collection(
-        db,
-        "notifications"
-      ),
-      {
-
-        targetBgmi,
-
-        title,
-
-        message,
-
-        type,
-
-        read:false,
-
-        createdAt:
-          new Date()
-
-      }
-    );
-
-  }
-
-  catch(error){
-
-    console.error(
-      "Notification error:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   SEND JOIN REQUEST
-   ===================================================== */
-
-window.sendRequest =
-async function(squadId){
-
-  const profile =
-    getMyProfile();
-
-
-  if(!profile){
-
-    alert(
-      "Please create your profile first."
-    );
-
-    return;
-
-  }
-
-
-  try{
-
-    const squadRef =
-      doc(
-        db,
-        "squads",
-        squadId
-      );
-
-    const squadSnap =
-      await getDoc(
-        squadRef
-      );
-
-
-    if(!squadSnap.exists()){
-
-      alert(
-        "Squad not found."
-      );
-
-      return;
-
-    }
-
-
-    const squad =
-      squadSnap.data();
-
-
-    if(
-      Number(squad.slots) <= 0
-    ){
-
-      alert(
-        "❌ No player slots available."
-      );
-
-      return;
-
-    }
-
-
-    if(
-      squad.leaderBgmi ===
-      profile.bgmi
-    ){
-
-      alert(
-        "You are already the squad leader."
-      );
-
-      return;
-
-    }
-
-
-    const existing =
-      await getDocs(
-        query(
-          collection(
-            db,
-            "squadRequests"
-          ),
-
-          where(
-            "squadId",
-            "==",
-            squadId
-          ),
-
-          where(
-            "playerBgmi",
-            "==",
-            profile.bgmi
-          ),
-
-          where(
-            "status",
-            "==",
-            "pending"
-          )
-
-        )
-      );
-
-
-    if(!existing.empty){
-
-      alert(
-        "You already sent a request."
-      );
-
-      return;
-
-    }
-
-
-    await addDoc(
-      collection(
-        db,
-        "squadRequests"
-      ),
-      {
-
-        squadId,
-
-        playerName:
-          profile.name,
-
-        playerBgmi:
-          profile.bgmi,
-
-        playerRole:
-          profile.role,
-
-        playerTier:
-          profile.tier,
-
-        playerLanguage:
-          profile.language,
-
-        status:
-          "pending",
-
-        createdAt:
-          new Date()
-
-      }
-    );
-
-
-    /* SEND NOTIFICATION TO LEADER */
-
-    await createNotification(
-
-      squad.leaderBgmi,
-
-      "📩 New Squad Request",
-
-      profile.name +
-      " wants to join your squad " +
-      squad.name,
-
-      "join_request"
-
-    );
-
-
-    alert(
-      "📩 Join request sent!"
-    );
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "Error sending request: " +
-      error.message
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   LOAD REQUESTS
-   ===================================================== */
-
-async function loadRequests(){
-
-  const list =
-    document.getElementById(
-      "requestList"
-    );
-
-  const profile =
-    getMyProfile();
-
-
-  if(!profile){
-
-    list.innerHTML =
-      '<p class="empty">Create a profile first.</p>';
-
-    return;
-
-  }
-
-
-  try{
-
-    const squadsSnapshot =
-      await getDocs(
-        query(
-          collection(
-            db,
-            "squads"
-          ),
-
-          where(
-            "leaderBgmi",
-            "==",
-            profile.bgmi
-          )
-
-        )
-      );
-
-
-    list.innerHTML = "";
-
-    let found = false;
-
-
-    for(
-      const squadDoc
-      of squadsSnapshot.docs
-    ){
-
-      const squad =
-        squadDoc.data();
-
-
-      const requestsSnapshot =
-        await getDocs(
-          query(
-            collection(
-              db,
-              "squadRequests"
-            ),
-
-            where(
-              "squadId",
-              "==",
-              squadDoc.id
-            ),
-
-            where(
-              "status",
-              "==",
-              "pending"
-            )
-
-          )
-        );
-
-
-      requestsSnapshot.forEach(
-        requestDoc => {
-
-          found = true;
-
-          const r =
-            requestDoc.data();
-
-          const div =
-            document.createElement(
-              "div"
-            );
-
-          div.className =
-            "request";
-
-
-          div.innerHTML = `
-
-            <h3>
-              📩 ${r.playerName}
-            </h3>
-
-            <p>
-              🛡️ Squad:
-              ${squad.name}
-            </p>
-
-            <p>
-              🎯 Role:
-              ${r.playerRole}
-            </p>
-
-            <p>
-              🏆 Tier:
-              ${r.playerTier}
-            </p>
-
-            <p>
-              🌐 Language:
-              ${r.playerLanguage}
-            </p>
-
-            <p>
-              🆔 BGMI ID:
-              ${r.playerBgmi}
-            </p>
-
-            <div class="action-row">
-
-              <button
-                class="green"
-                onclick="acceptRequest(
-                  '${requestDoc.id}',
-                  '${squadDoc.id}',
-                  '${r.playerName}',
-                  '${r.playerBgmi}'
-                )">
-
-                ✅ ACCEPT
-
-              </button>
-
-              <button
-                class="red"
-                onclick="rejectRequest(
-                  '${requestDoc.id}',
-                  '${r.playerBgmi}',
-                  '${squad.name}'
-                )">
-
-                ❌ REJECT
-
-              </button>
-
-            </div>
-
-          `;
-
-          list.appendChild(div);
-
-        }
-      );
-
-    }
-
-
-    if(!found){
-
-      list.innerHTML =
-        '<p class="empty">No pending squad requests.</p>';
-
-    }
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    list.innerHTML =
-      '<p class="empty">
-        Unable to load requests.
-      </p>';
-
-  }
-
-}
-
-
-/* =====================================================
-   ACCEPT REQUEST
-   ===================================================== */
-
-window.acceptRequest =
-async function(
-  requestId,
-  squadId,
-  playerName,
-  playerBgmi
-){
-
-  try{
-
-    const squadRef =
-      doc(
-        db,
-        "squads",
-        squadId
-      );
-
-    const squadSnap =
-      await getDoc(
-        squadRef
-      );
-
-
-    if(!squadSnap.exists()){
-
-      alert(
-        "Squad not found."
-      );
-
-      return;
-
-    }
-
-
-    const squad =
-      squadSnap.data();
-
-
-    if(
-      Number(squad.slots) <= 0
-    ){
-
-      alert(
-        "❌ No player slots available."
-      );
-
-      return;
-
-    }
-
-
-    const members =
-      Array.isArray(
-        squad.members
-      )
-      ? squad.members
-      : [];
-
-
-    if(
-      !members.includes(
-        playerName
-      )
-    ){
-
-      members.push(
-        playerName
-      );
-
-    }
-
-
-    await updateDoc(
-      squadRef,
-      {
-
-        members,
-
-        memberCount:
-          members.length,
-
-        slots:
-          Number(squad.slots) - 1
-
-      }
-    );
-
-
-    await updateDoc(
-      doc(
-        db,
-        "squadRequests",
-        requestId
-      ),
-      {
-
-        status:
-          "accepted"
-
-      }
-    );
-
-
-    /* NOTIFY PLAYER */
-
-    await createNotification(
-
-      playerBgmi,
-
-      "✅ Request Accepted",
-
-      "Your request to join " +
-      squad.name +
-      " has been accepted!",
-
-      "request_accepted"
-
-    );
-
-
-    alert(
-      "✅ Player accepted!"
-    );
-
-
-    loadSquads();
-
-    loadRequests();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "Error accepting request: " +
-      error.message
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   REJECT REQUEST
-   ===================================================== */
-
-window.rejectRequest =
-async function(
-  requestId,
-  playerBgmi,
-  squadName
-){
-
-  try{
-
-    await updateDoc(
-      doc(
-        db,
-        "squadRequests",
-        requestId
-      ),
-      {
-
-        status:
-          "rejected"
-
-      }
-    );
-
-
-    /* NOTIFY PLAYER */
-
-    await createNotification(
-
-      playerBgmi,
-
-      "❌ Request Rejected",
-
-      "Your request to join " +
-      squadName +
-      " was rejected.",
-
-      "request_rejected"
-
-    );
-
-
-    alert(
-      "❌ Request rejected."
-    );
-
-
-    loadRequests();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "Error rejecting request: " +
-      error.message
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   LOAD NOTIFICATIONS
-   ===================================================== */
-
-async function loadNotifications(){
-
-  const list =
-    document.getElementById(
-      "notificationList"
-    );
-
-  const count =
-    document.getElementById(
-      "notificationCount"
-    );
-
-  const profile =
-    getMyProfile();
-
-
-  if(!profile){
-
-    list.innerHTML =
-      '<p class="empty">Create a profile first.</p>';
-
-    count.style.display =
-      "none";
-
-    return;
-
-  }
-
-
-  try{
-
-    const snapshot =
-      await getDocs(
-        query(
-          collection(
-            db,
-            "notifications"
-          ),
-
-          where(
-            "targetBgmi",
-            "==",
-            profile.bgmi
-          )
-
-        )
-      );
-
-
-    list.innerHTML = "";
-
-    let unread = 0;
-
-
-    const notifications =
-      [];
-
-
-    snapshot.forEach(
-      notificationDoc => {
-
-        notifications.push({
-
-          id:
-            notificationDoc.id,
-
-          ...notificationDoc.data()
-
-        });
-
-      }
-    );
-
-
-    notifications.sort(
-      (a,b) => {
-
-        const aTime =
-          a.createdAt?.seconds ||
-          0;
-
-        const bTime =
-          b.createdAt?.seconds ||
-          0;
-
-        return bTime - aTime;
-
-      }
-    );
-
-
-    if(
-      notifications.length === 0
-    ){
-
-      list.innerHTML =
-        '<p class="empty">No notifications yet.</p>';
-
-      count.style.display =
-        "none";
-
-      return;
-
-    }
-
-
-    notifications.forEach(
-      n => {
-
-        if(!n.read){
-
-          unread++;
-
-        }
-
-
-        const div =
-          document.createElement(
-            "div"
-          );
-
-
-        div.className =
-          "notification " +
-          (
-            n.read
-            ? "read"
-            : "unread"
-          );
-
-
-        div.innerHTML = `
-
-          <div class="notification-title">
-            ${n.title || "Notification"}
+          <div class="info-box">
+            <strong>BGMI ID</strong>
+            ${escapeHtml(profile.bgmi)}
           </div>
 
-          <p>
-            ${n.message || ""}
-          </p>
-
-          <div class="notification-time">
-            ${formatDate(n.createdAt)}
+          <div class="info-box">
+            <strong>Role</strong>
+            ${escapeHtml(profile.role)}
           </div>
 
-          ${
-            !n.read
-            ?
-            `
+          <div class="info-box">
+            <strong>Tier</strong>
+            ${escapeHtml(profile.tier)}
+          </div>
+
+          <div class="info-box">
+            <strong>Language</strong>
+            ${escapeHtml(profile.language)}
+          </div>
+
+        </div>
+
+        <br>
+
+        <p>
+          ${escapeHtml(profile.about || "No description.")}
+        </p>
+
+        <br>
+
+        ${
+          teamInfo
+          ?
+          `
+          <div class="success">
+
+            🛡️ Current Team:
+            <strong>${escapeHtml(teamInfo.team.name)}</strong>
+
+            <br>
+
+            Position:
+            <strong>${escapeHtml(teamInfo.member.position)}</strong>
+
+            <br><br>
+
             <button
-              class="green"
-              onclick="markNotificationRead(
-                '${n.id}'
-              )">
-
-              ✓ Mark as read
-
+              class="btn danger"
+              onclick="leaveTeam('${teamInfo.id}')"
+            >
+              LEAVE TEAM
             </button>
-            `
-            :
-            ""
-          }
 
-        `;
+          </div>
+          `
+          :
+          `
+          <div class="info-box">
+            <strong>Current Team</strong>
+            No team
+          </div>
+          `
+        }
+
+      </div>
+
+    `;
+
+  };
 
 
-        list.appendChild(div);
+  document
+    .getElementById("profileForm")
+    .addEventListener("submit", async function(event){
+
+      event.preventDefault();
+
+
+      const name =
+        document
+          .getElementById("profileName")
+          .value
+          .trim();
+
+
+      const bgmi =
+        document
+          .getElementById("profileBgmi")
+          .value
+          .trim();
+
+
+      const role =
+        document
+          .getElementById("profileRole")
+          .value;
+
+
+      const tier =
+        document
+          .getElementById("profileTier")
+          .value;
+
+
+      const language =
+        document
+          .getElementById("profileLanguage")
+          .value
+          .trim();
+
+
+      const about =
+        document
+          .getElementById("profileAbout")
+          .value
+          .trim();
+
+
+      if(!name || !bgmi){
+
+        alert("Please enter your name and BGMI ID.");
+
+        return;
 
       }
-    );
 
 
-    if(unread > 0){
-
-      count.textContent =
-        unread;
-
-      count.style.display =
-        "flex";
-
-    }
-    else{
-
-      count.style.display =
-        "none";
-
-    }
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    list.innerHTML =
-      '<p class="empty">Unable to load notifications.</p>';
-
-  }
-
-}
-
-
-/* =====================================================
-   FORMAT DATE
-   ===================================================== */
-
-function formatDate(timestamp){
-
-  if(!timestamp){
-
-    return "";
-
-  }
-
-
-  try{
-
-    if(timestamp.seconds){
-
-      return new Date(
-        timestamp.seconds * 1000
-      ).toLocaleString();
-
-    }
-
-
-    return new Date(
-      timestamp
-    ).toLocaleString();
-
-  }
-
-  catch{
-
-    return "";
-
-  }
-
-}
-
-
-/* =====================================================
-   MARK ONE READ
-   ===================================================== */
-
-window.markNotificationRead =
-async function(
-  notificationId
-){
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "notifications",
-        notificationId
-      ),
-
-      {
-        read:true
-      }
-
-    );
-
-
-    loadNotifications();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "Unable to mark notification."
-    );
-
-  }
-
-};
-
-
-/* =====================================================
-   MARK ALL READ
-   ===================================================== */
-
-document
-  .getElementById("markAllRead")
-  .addEventListener(
-    "click",
-    async function(){
-
-      const profile =
+      const existingLocal =
         getMyProfile();
 
 
-      if(!profile){
+      if(existingLocal){
 
         alert(
-          "Please create your profile first."
+          "A profile is already saved on this device."
         );
 
         return;
@@ -2172,163 +1070,2944 @@ document
 
       try{
 
+        const q =
+          query(
+            collection(db, PLAYERS),
+            where("bgmi","==",bgmi)
+          );
+
+
+        const existing =
+          await getDocs(q);
+
+
+        if(!existing.empty){
+
+          alert(
+            "This BGMI ID already has a profile."
+          );
+
+          return;
+
+        }
+
+
+        const profile = {
+
+          name,
+
+          bgmi,
+
+          role,
+
+          tier,
+
+          language,
+
+          about,
+
+          createdAt:new Date()
+
+        };
+
+
+        await addDoc(
+          collection(db, PLAYERS),
+          profile
+        );
+
+
+        localStorage.setItem(
+          "myProfile",
+          JSON.stringify(profile)
+        );
+
+
+        alert("Profile created successfully!");
+
+        loadMyProfile();
+
+      }catch(error){
+
+        console.error(error);
+
+        alert(
+          "Unable to create profile: " +
+          error.message
+        );
+
+      }
+
+    });
+
+
+  /* =====================================================
+     PLAYERS
+     ===================================================== */
+
+  window.loadPlayers = async function(){
+
+    const list =
+      document.getElementById("playersList");
+
+
+    const search =
+      (
+        document
+          .getElementById("playerSearch")
+          ?.value || ""
+      )
+      .toLowerCase();
+
+
+    list.innerHTML =
+      `<p class="empty">Loading players...</p>`;
+
+
+    try{
+
+      const snapshot =
+        await getDocs(
+          collection(db, PLAYERS)
+        );
+
+
+      let html = "";
+
+
+      snapshot.forEach(item => {
+
+        const p =
+          item.data();
+
+
+        const text =
+          (
+            p.name +
+            " " +
+            p.bgmi +
+            " " +
+            p.role +
+            " " +
+            p.tier +
+            " " +
+            p.language
+          )
+          .toLowerCase();
+
+
+        if(
+          search &&
+          !text.includes(search)
+        ){
+
+          return;
+
+        }
+
+
+        html += `
+
+          <div class="card">
+
+            <h3>
+              ${escapeHtml(p.name)}
+            </h3>
+
+            <div class="profile-info">
+
+              <div class="info-box">
+                <strong>BGMI ID</strong>
+                ${escapeHtml(p.bgmi)}
+              </div>
+
+              <div class="info-box">
+                <strong>Role</strong>
+                ${escapeHtml(p.role)}
+              </div>
+
+              <div class="info-box">
+                <strong>Tier</strong>
+                ${escapeHtml(p.tier)}
+              </div>
+
+              <div class="info-box">
+                <strong>Language</strong>
+                ${escapeHtml(p.language)}
+              </div>
+
+            </div>
+
+            <br>
+
+            <p>
+              ${escapeHtml(p.about || "")}
+            </p>
+
+          </div>
+
+        `;
+
+      });
+
+
+      list.innerHTML =
+        html ||
+        `<p class="empty">No players found.</p>`;
+
+
+    }catch(error){
+
+      console.error(error);
+
+      list.innerHTML =
+        `<p class="empty">
+          Unable to load players.
+        </p>`;
+
+    }
+
+  };
+
+
+  /* =====================================================
+     TEAM CODE
+     ===================================================== */
+
+  function randomCharacters(length){
+
+    const chars =
+      "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let result = "";
+
+
+    for(let i = 0; i < length; i++){
+
+      result +=
+        chars[
+          Math.floor(
+            Math.random() * chars.length
+          )
+        ];
+
+    }
+
+
+    return result;
+
+  }
+
+
+  async function generateUniqueTeamCode(){
+
+    for(let attempt = 0; attempt < 20; attempt++){
+
+      const code =
+        "IV-" +
+        randomCharacters(6);
+
+
+      const q =
+        query(
+          collection(db, TEAMS),
+          where("teamCode","==",code)
+        );
+
+
+      const result =
+        await getDocs(q);
+
+
+      if(result.empty){
+
+        return code;
+
+      }
+
+    }
+
+
+    throw new Error(
+      "Could not generate a unique Team Code."
+    );
+
+  }
+
+
+  /* =====================================================
+     TEAM HELPERS
+     ===================================================== */
+
+  function normalizeMembers(team){
+
+    let members =
+      Array.isArray(team.members)
+      ? team.members
+      : [];
+
+
+    /*
+      Old team documents may have members as strings.
+      Convert them safely for display.
+    */
+
+    members =
+      members.map(member => {
+
+        if(typeof member === "string"){
+
+          return {
+
+            name:member,
+
+            bgmi:"",
+
+            role:"",
+
+            tier:"",
+
+            language:"",
+
+            position:"main"
+
+          };
+
+        }
+
+
+        return {
+
+          name:member.name || "",
+
+          bgmi:member.bgmi || "",
+
+          role:member.role || "",
+
+          tier:member.tier || "",
+
+          language:member.language || "",
+
+          position:member.position || "main"
+
+        };
+
+      });
+
+
+    return members;
+
+  }
+
+
+  function getPositionCounts(members){
+
+    return {
+
+      owner:
+        members.filter(
+          m => m.position === "owner"
+        ).length,
+
+      manager:
+        members.filter(
+          m => m.position === "manager"
+        ).length,
+
+      main:
+        members.filter(
+          m => m.position === "main"
+        ).length,
+
+      optional:
+        members.filter(
+          m => m.position === "optional"
+        ).length
+
+    };
+
+  }
+
+
+  function findNextPosition(members){
+
+    const counts =
+      getPositionCounts(members);
+
+
+    if(counts.manager < 1){
+
+      return "manager";
+
+    }
+
+
+    if(counts.main < 4){
+
+      return "main";
+
+    }
+
+
+    if(counts.optional < 2){
+
+      return "optional";
+
+    }
+
+
+    return null;
+
+  }
+
+
+  async function getPlayerTeam(bgmi){
+
+    if(!bgmi){
+
+      return null;
+
+    }
+
+
+    try{
+
+      const q =
+        query(
+          collection(db, TEAMS),
+          where(
+            "memberBgmis",
+            "array-contains",
+            bgmi
+          )
+        );
+
+
+      const snapshot =
+        await getDocs(q);
+
+
+      if(snapshot.empty){
+
+        return null;
+
+      }
+
+
+      const item =
+        snapshot.docs[0];
+
+
+      const team =
+        item.data();
+
+
+      const members =
+        normalizeMembers(team);
+
+
+      const member =
+        members.find(
+          m => m.bgmi === bgmi
+        );
+
+
+      if(!member){
+
+        return null;
+
+      }
+
+
+      return {
+
+        id:item.id,
+
+        team,
+
+        member
+
+      };
+
+    }catch(error){
+
+      console.error(error);
+
+      return null;
+
+    }
+
+  }
+
+
+  /* =====================================================
+     TEAM CREATION STATUS
+     ===================================================== */
+
+  window.checkTeamCreationStatus =
+    async function(){
+
+      const status =
+        document.getElementById(
+          "teamCreateStatus"
+        );
+
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        status.innerHTML = `
+          <div class="warning">
+            You must create a profile before
+            creating a team.
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      const team =
+        await getPlayerTeam(profile.bgmi);
+
+
+      if(team){
+
+        status.innerHTML = `
+
+          <div class="warning">
+
+            🚫 You are already in team:
+
+            <strong>
+              ${escapeHtml(team.team.name)}
+            </strong>
+
+            <br><br>
+
+            Leave your current team before
+            creating another team.
+
+          </div>
+
+        `;
+
+      }else{
+
+        status.innerHTML = `
+          <div class="success">
+            ✅ You can create your Dream Team.
+          </div>
+        `;
+
+      }
+
+    };
+
+
+  /* =====================================================
+     CREATE TEAM
+     ===================================================== */
+
+  document
+    .getElementById("teamForm")
+    .addEventListener("submit", async function(event){
+
+      event.preventDefault();
+
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        alert(
+          "Create your profile first."
+        );
+
+        showSection("profile");
+
+        return;
+
+      }
+
+
+      try{
+
+        const currentTeam =
+          await getPlayerTeam(profile.bgmi);
+
+
+        if(currentTeam){
+
+          alert(
+            "You are already in a team. " +
+            "Leave your current team before creating another team."
+          );
+
+          return;
+
+        }
+
+
+        const teamName =
+          document
+            .getElementById("teamName")
+            .value
+            .trim();
+
+
+        const language =
+          document
+            .getElementById("teamLanguage")
+            .value
+            .trim();
+
+
+        const requiredRole =
+          document
+            .getElementById("teamRequiredRole")
+            .value;
+
+
+        const requiredTier =
+          document
+            .getElementById("teamRequiredTier")
+            .value;
+
+
+        const description =
+          document
+            .getElementById("teamDescription")
+            .value
+            .trim();
+
+
+        const teamCode =
+          await generateUniqueTeamCode();
+
+
+        const owner = {
+
+          name:profile.name,
+
+          bgmi:profile.bgmi,
+
+          role:profile.role,
+
+          tier:profile.tier,
+
+          language:profile.language,
+
+          position:"owner"
+
+        };
+
+
+        const team = {
+
+          name:teamName,
+
+          teamCode,
+
+          ownerName:profile.name,
+
+          ownerBgmi:profile.bgmi,
+
+          manager:null,
+
+          mainPlayers:[],
+
+          optionalPlayers:[],
+
+          members:[owner],
+
+          memberBgmis:[profile.bgmi],
+
+          memberCount:1,
+
+          maxMembers:8,
+
+          requiredRole,
+
+          requiredTier,
+
+          language,
+
+          description,
+
+          createdAt:new Date()
+
+        };
+
+
+        const teamRef =
+          await addDoc(
+            collection(db, TEAMS),
+            team
+          );
+
+
+        alert(
+          "Dream Team created!\n\n" +
+          "Your Team Code is:\n" +
+          teamCode
+        );
+
+
+        document
+          .getElementById("teamForm")
+          .reset();
+
+
+        await loadTeams();
+
+        showSection("findTeam");
+
+
+      }catch(error){
+
+        console.error(error);
+
+        alert(
+          "Unable to create team: " +
+          error.message
+        );
+
+      }
+
+    });
+
+
+  /* =====================================================
+     LOAD TEAMS
+     ===================================================== */
+
+  window.loadTeams = async function(){
+
+    const list =
+      document.getElementById("teamsList");
+
+
+    const search =
+      (
+        document
+          .getElementById("teamSearch")
+          ?.value || ""
+      )
+      .toLowerCase();
+
+
+    list.innerHTML =
+      `<p class="empty">Loading teams...</p>`;
+
+
+    try{
+
+      const snapshot =
+        await getDocs(
+          collection(db, TEAMS)
+        );
+
+
+      const profile =
+        getMyProfile();
+
+
+      let html = "";
+
+
+      for(const item of snapshot.docs){
+
+        const team =
+          item.data();
+
+
+        const members =
+          normalizeMembers(team);
+
+
+        const counts =
+          getPositionCounts(members);
+
+
+        const text =
+          (
+            team.name +
+            " " +
+            team.language +
+            " " +
+            team.requiredRole +
+            " " +
+            team.requiredTier +
+            " " +
+            team.teamCode
+          )
+          .toLowerCase();
+
+
+        if(
+          search &&
+          !text.includes(search)
+        ){
+
+          continue;
+
+        }
+
+
+        const isMember =
+          profile &&
+          members.some(
+            m => m.bgmi === profile.bgmi
+          );
+
+
+        const isOwner =
+          profile &&
+          team.ownerBgmi === profile.bgmi;
+
+
+        html += `
+
+          <div class="card">
+
+            <h3>
+              🛡️ ${escapeHtml(team.name)}
+            </h3>
+
+            <p>
+              Owner:
+              <strong>
+                ${escapeHtml(team.ownerName || "Unknown")}
+              </strong>
+            </p>
+
+            <div>
+              <span class="team-code">
+                ${escapeHtml(team.teamCode || "NO CODE")}
+              </span>
+
+              ${
+                team.teamCode
+                ?
+                `
+                <button
+                  class="copy-btn"
+                  onclick="copyTeamCode('${escapeHtml(team.teamCode)}')"
+                >
+                  📋 Copy
+                </button>
+                `
+                :
+                ""
+              }
+
+            </div>
+
+            <br>
+
+            <div>
+
+              <span class="badge">
+                👥 ${members.length}/8 Members
+              </span>
+
+              <span class="badge">
+                🎮 Main ${counts.main}/4
+              </span>
+
+              <span class="badge">
+                🔄 Optional ${counts.optional}/2
+              </span>
+
+              <span class="badge">
+                👔 Manager ${counts.manager}/1
+              </span>
+
+            </div>
+
+            <br>
+
+            <p>
+              Language:
+              ${escapeHtml(team.language || "Any")}
+            </p>
+
+            <p>
+              Required Role:
+              ${escapeHtml(team.requiredRole || "Any")}
+            </p>
+
+            <p>
+              Required Tier:
+              ${escapeHtml(team.requiredTier || "Any")}
+            </p>
+
+            <br>
+
+            <p>
+              ${escapeHtml(team.description || "")}
+            </p>
+
+            <div class="member-list">
+
+              <strong>Members</strong>
+
+              <br><br>
+
+              ${
+                members.map(member => `
+
+                  <div class="member">
+
+                    <strong>
+                      ${escapeHtml(member.name)}
+                    </strong>
+
+                    <span
+                      class="badge ${escapeHtml(member.position)}"
+                    >
+                      ${escapeHtml(member.position)}
+                    </span>
+
+                    <br>
+
+                    <small>
+                      ${escapeHtml(member.role)}
+                      ·
+                      ${escapeHtml(member.tier)}
+                    </small>
+
+                  </div>
+
+                `).join("")
+              }
+
+            </div>
+
+            <br>
+
+            ${
+              isMember
+              ?
+              `
+
+                ${
+                  isOwner
+                  ?
+                  `
+                  <div class="success">
+                    👑 You are the owner of this team.
+                  </div>
+                  `
+                  :
+                  `
+                  <button
+                    class="btn danger"
+                    onclick="leaveTeam('${item.id}')"
+                  >
+                    LEAVE TEAM
+                  </button>
+                  `
+                }
+
+              `
+              :
+              members.length >= 8
+              ?
+              `
+                <button
+                  class="btn secondary"
+                  disabled
+                >
+                  TEAM FULL
+                </button>
+              `
+              :
+              `
+                <button
+                  class="btn"
+                  onclick="sendTeamRequest('${item.id}')"
+                >
+                  📨 SEND JOIN REQUEST
+                </button>
+              `
+            }
+
+          </div>
+
+        `;
+
+      }
+
+
+      list.innerHTML =
+        html ||
+        `<p class="empty">
+          No teams found.
+        </p>`;
+
+
+    }catch(error){
+
+      console.error(error);
+
+      list.innerHTML =
+        `<p class="empty">
+          Unable to load teams.
+        </p>`;
+
+    }
+
+  };
+
+
+  /* =====================================================
+     COPY TEAM CODE
+     ===================================================== */
+
+  window.copyTeamCode =
+    async function(code){
+
+      try{
+
+        await navigator.clipboard.writeText(code);
+
+        alert(
+          "Team Code copied: " + code
+        );
+
+      }catch(error){
+
+        prompt(
+          "Copy this Team Code:",
+          code
+        );
+
+      }
+
+    };
+
+
+  /* =====================================================
+     SEND REQUEST TO TEAM
+     ===================================================== */
+
+  window.sendTeamRequest =
+    async function(teamId){
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        alert(
+          "Create your profile first."
+        );
+
+        showSection("profile");
+
+        return;
+
+      }
+
+
+      try{
+
+        const currentTeam =
+          await getPlayerTeam(profile.bgmi);
+
+
+        if(currentTeam){
+
+          alert(
+            "You are already in a team. " +
+            "Leave your current team before joining another team."
+          );
+
+          return;
+
+        }
+
+
+        const teamSnap =
+          await getDoc(
+            doc(db, TEAMS, teamId)
+          );
+
+
+        if(!teamSnap.exists()){
+
+          alert("Team no longer exists.");
+
+          return;
+
+        }
+
+
+        const team =
+          teamSnap.data();
+
+
+        const members =
+          normalizeMembers(team);
+
+
+        if(members.length >= 8){
+
+          alert("This team is full.");
+
+          return;
+
+        }
+
+
+        const requestQuery =
+          query(
+            collection(db, REQUESTS),
+            where("teamId","==",teamId),
+            where("playerBgmi","==",profile.bgmi),
+            where("status","==","pending")
+          );
+
+
+        const existing =
+          await getDocs(requestQuery);
+
+
+        if(!existing.empty){
+
+          alert(
+            "You already sent a join request to this team."
+          );
+
+          return;
+
+        }
+
+
+        await addDoc(
+          collection(db, REQUESTS),
+          {
+
+            teamId,
+
+            teamName:team.name,
+
+            teamCode:team.teamCode,
+
+            ownerBgmi:team.ownerBgmi,
+
+            playerName:profile.name,
+
+            playerBgmi:profile.bgmi,
+
+            playerRole:profile.role,
+
+            playerTier:profile.tier,
+
+            playerLanguage:profile.language,
+
+            status:"pending",
+
+            createdAt:new Date()
+
+          }
+        );
+
+
+        await addDoc(
+          collection(db, NOTIFICATIONS),
+          {
+
+            targetBgmi:team.ownerBgmi,
+
+            title:"📨 New Team Join Request",
+
+            message:
+              profile.name +
+              " wants to join " +
+              team.name,
+
+            type:"team_request",
+
+            teamId,
+
+            playerBgmi:profile.bgmi,
+
+            read:false,
+
+            createdAt:new Date()
+
+          }
+        );
+
+
+        alert(
+          "Join request sent to the team owner!"
+        );
+
+
+      }catch(error){
+
+        console.error(error);
+
+        alert(
+          "Unable to send request: " +
+          error.message
+        );
+
+      }
+
+    };
+
+
+  /* =====================================================
+     JOIN USING TEAM CODE
+     ===================================================== */
+
+  document
+    .getElementById("joinCodeForm")
+    .addEventListener("submit", async function(event){
+
+      event.preventDefault();
+
+
+      const result =
+        document.getElementById(
+          "joinCodeResult"
+        );
+
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        result.innerHTML = `
+          <div class="warning">
+            Create your profile first.
+          </div>
+        `;
+
+        showSection("profile");
+
+        return;
+
+      }
+
+
+      const code =
+        document
+          .getElementById("joinTeamCode")
+          .value
+          .trim()
+          .toUpperCase();
+
+
+      if(!code){
+
+        return;
+
+      }
+
+
+      result.innerHTML =
+        `<p class="empty">Finding team...</p>`;
+
+
+      try{
+
+        const currentTeam =
+          await getPlayerTeam(profile.bgmi);
+
+
+        if(currentTeam){
+
+          result.innerHTML = `
+            <div class="warning">
+
+              🚫 You are already in:
+
+              <strong>
+                ${escapeHtml(currentTeam.team.name)}
+              </strong>
+
+              <br><br>
+
+              Leave your current team before
+              requesting to join another team.
+
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        const q =
+          query(
+            collection(db, TEAMS),
+            where("teamCode","==",code)
+          );
+
+
         const snapshot =
-          await getDocs(
-            query(
-              collection(
-                db,
-                "notifications"
+          await getDocs(q);
+
+
+        if(snapshot.empty){
+
+          result.innerHTML = `
+            <div class="warning">
+              ❌ No team found with code
+              <strong>${escapeHtml(code)}</strong>.
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        const teamDoc =
+          snapshot.docs[0];
+
+
+        const team =
+          teamDoc.data();
+
+
+        const members =
+          normalizeMembers(team);
+
+
+        if(members.length >= 8){
+
+          result.innerHTML = `
+            <div class="warning">
+              This team is already full.
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        const requestQuery =
+          query(
+            collection(db, REQUESTS),
+            where("teamId","==",teamDoc.id),
+            where("playerBgmi","==",profile.bgmi),
+            where("status","==","pending")
+          );
+
+
+        const existing =
+          await getDocs(requestQuery);
+
+
+        if(!existing.empty){
+
+          result.innerHTML = `
+            <div class="warning">
+              You already have a pending request
+              for this team.
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        await addDoc(
+          collection(db, REQUESTS),
+          {
+
+            teamId:teamDoc.id,
+
+            teamName:team.name,
+
+            teamCode:team.teamCode,
+
+            ownerBgmi:team.ownerBgmi,
+
+            playerName:profile.name,
+
+            playerBgmi:profile.bgmi,
+
+            playerRole:profile.role,
+
+            playerTier:profile.tier,
+
+            playerLanguage:profile.language,
+
+            status:"pending",
+
+            createdAt:new Date()
+
+          }
+        );
+
+
+        await addDoc(
+          collection(db, NOTIFICATIONS),
+          {
+
+            targetBgmi:team.ownerBgmi,
+
+            title:"📨 New Team Join Request",
+
+            message:
+              profile.name +
+              " wants to join your team " +
+              team.name,
+
+            type:"team_request",
+
+            teamId:teamDoc.id,
+
+            playerBgmi:profile.bgmi,
+
+            read:false,
+
+            createdAt:new Date()
+
+          }
+        );
+
+
+        result.innerHTML = `
+
+          <div class="success">
+
+            ✅ Join request sent!
+
+            <br><br>
+
+            Team:
+            <strong>
+              ${escapeHtml(team.name)}
+            </strong>
+
+            <br>
+
+            Team Code:
+            <strong>
+              ${escapeHtml(team.teamCode)}
+            </strong>
+
+            <br><br>
+
+            Wait for the owner to accept
+            your request.
+
+          </div>
+
+        `;
+
+
+        document
+          .getElementById("joinTeamCode")
+          .value = "";
+
+
+      }catch(error){
+
+        console.error(error);
+
+        result.innerHTML = `
+          <div class="warning">
+            Unable to send request:
+            ${escapeHtml(error.message)}
+          </div>
+        `;
+
+      }
+
+    });
+
+
+  /* =====================================================
+     ACCEPT REQUEST
+     ===================================================== */
+
+  window.acceptRequest =
+    async function(requestId){
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        return;
+
+      }
+
+
+      try{
+
+        const requestRef =
+          doc(db, REQUESTS, requestId);
+
+
+        const requestSnap =
+          await getDoc(requestRef);
+
+
+        if(!requestSnap.exists()){
+
+          alert("Request not found.");
+
+          return;
+
+        }
+
+
+        const request =
+          requestSnap.data();
+
+
+        const teamRef =
+          doc(db, TEAMS, request.teamId);
+
+
+        const teamSnap =
+          await getDoc(teamRef);
+
+
+        if(!teamSnap.exists()){
+
+          alert("Team not found.");
+
+          return;
+
+        }
+
+
+        const team =
+          teamSnap.data();
+
+
+        if(team.ownerBgmi !== profile.bgmi){
+
+          alert(
+            "Only the team owner can accept requests."
+          );
+
+          return;
+
+        }
+
+
+        if(request.status !== "pending"){
+
+          alert(
+            "This request has already been processed."
+          );
+
+          return;
+
+        }
+
+
+        const members =
+          normalizeMembers(team);
+
+
+        if(members.length >= 8){
+
+          alert(
+            "Team is full."
+          );
+
+          return;
+
+        }
+
+
+        /*
+          Check whether player joined another team
+          after sending the request.
+        */
+
+        const playerTeam =
+          await getPlayerTeam(
+            request.playerBgmi
+          );
+
+
+        if(playerTeam){
+
+          await updateDoc(
+            requestRef,
+            {
+              status:"rejected"
+            }
+          );
+
+
+          alert(
+            "This player is already in another team."
+          );
+
+          return;
+
+        }
+
+
+        const position =
+          findNextPosition(members);
+
+
+        if(!position){
+
+          alert(
+            "No available position in this team."
+          );
+
+          return;
+
+        }
+
+
+        const newMember = {
+
+          name:request.playerName,
+
+          bgmi:request.playerBgmi,
+
+          role:request.playerRole,
+
+          tier:request.playerTier,
+
+          language:request.playerLanguage,
+
+          position
+
+        };
+
+
+        const updatedMembers =
+          [...members,newMember];
+
+
+        const newManager =
+          position === "manager"
+          ?
+          newMember
+          :
+          (
+            team.manager || null
+          );
+
+
+        const mainPlayers =
+          updatedMembers.filter(
+            m => m.position === "main"
+          );
+
+
+        const optionalPlayers =
+          updatedMembers.filter(
+            m => m.position === "optional"
+          );
+
+
+        await updateDoc(
+          teamRef,
+          {
+
+            members:updatedMembers,
+
+            memberBgmis:
+              updatedMembers.map(
+                m => m.bgmi
               ),
 
-              where(
-                "targetBgmi",
-                "==",
-                profile.bgmi
-              ),
+            memberCount:
+              updatedMembers.length,
 
-              where(
-                "read",
-                "==",
-                false
-              )
+            manager:newManager,
 
+            mainPlayers,
+
+            optionalPlayers
+
+          }
+        );
+
+
+        await updateDoc(
+          requestRef,
+          {
+
+            status:"accepted",
+
+            assignedPosition:position,
+
+            processedAt:new Date()
+
+          }
+        );
+
+
+        await addDoc(
+          collection(db, NOTIFICATIONS),
+          {
+
+            targetBgmi:request.playerBgmi,
+
+            title:"✅ Team Request Accepted",
+
+            message:
+              "You were accepted into " +
+              team.name +
+              " as " +
+              position,
+
+            type:"request_accepted",
+
+            teamId:request.teamId,
+
+            read:false,
+
+            createdAt:new Date()
+
+          }
+        );
+
+
+        alert(
+          "Player accepted as " +
+          position +
+          "!"
+        );
+
+
+        loadRequests();
+
+        loadTeams();
+
+
+      }catch(error){
+
+        console.error(error);
+
+        alert(
+          "Unable to accept request: " +
+          error.message
+        );
+
+      }
+
+    };
+
+
+  /* =====================================================
+     REJECT REQUEST
+     ===================================================== */
+
+  window.rejectRequest =
+    async function(requestId){
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        return;
+
+      }
+
+
+      try{
+
+        const requestRef =
+          doc(db, REQUESTS, requestId);
+
+
+        const requestSnap =
+          await getDoc(requestRef);
+
+
+        if(!requestSnap.exists()){
+
+          return;
+
+        }
+
+
+        const request =
+          requestSnap.data();
+
+
+        const teamSnap =
+          await getDoc(
+            doc(db, TEAMS, request.teamId)
+          );
+
+
+        if(!teamSnap.exists()){
+
+          return;
+
+        }
+
+
+        const team =
+          teamSnap.data();
+
+
+        if(team.ownerBgmi !== profile.bgmi){
+
+          alert(
+            "Only the team owner can reject requests."
+          );
+
+          return;
+
+        }
+
+
+        await updateDoc(
+          requestRef,
+          {
+
+            status:"rejected",
+
+            processedAt:new Date()
+
+          }
+        );
+
+
+        await addDoc(
+          collection(db, NOTIFICATIONS),
+          {
+
+            targetBgmi:request.playerBgmi,
+
+            title:"❌ Team Request Rejected",
+
+            message:
+              "Your request to join " +
+              team.name +
+              " was rejected.",
+
+            type:"request_rejected",
+
+            teamId:request.teamId,
+
+            read:false,
+
+            createdAt:new Date()
+
+          }
+        );
+
+
+        alert("Request rejected.");
+
+        loadRequests();
+
+
+      }catch(error){
+
+        console.error(error);
+
+        alert(
+          "Unable to reject request: " +
+          error.message
+        );
+
+      }
+
+    };
+
+
+  /* =====================================================
+     REQUESTS
+     ===================================================== */
+
+  window.loadRequests =
+    async function(){
+
+      const incoming =
+        document.getElementById(
+          "incomingRequests"
+        );
+
+
+      const mine =
+        document.getElementById(
+          "myRequests"
+        );
+
+
+      incoming.innerHTML =
+        `<p class="empty">Loading...</p>`;
+
+
+      mine.innerHTML =
+        `<p class="empty">Loading...</p>`;
+
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        incoming.innerHTML =
+          `<p class="empty">
+            Create a profile first.
+          </p>`;
+
+        mine.innerHTML =
+          `<p class="empty">
+            Create a profile first.
+          </p>`;
+
+        return;
+
+      }
+
+
+      try{
+
+        /*
+          MY SENT REQUESTS
+        */
+
+        const myQuery =
+          query(
+            collection(db, REQUESTS),
+            where(
+              "playerBgmi",
+              "==",
+              profile.bgmi
             )
           );
 
 
+        const mySnapshot =
+          await getDocs(myQuery);
+
+
+        let myHtml = "";
+
+
+        mySnapshot.forEach(item => {
+
+          const r =
+            item.data();
+
+
+          myHtml += `
+
+            <div class="notification">
+
+              <strong>
+                ${escapeHtml(r.teamName)}
+              </strong>
+
+              <br>
+
+              Team Code:
+              ${escapeHtml(r.teamCode || "")}
+
+              <br><br>
+
+              Status:
+
+              <span
+                class="status ${escapeHtml(r.status)}"
+              >
+                ${escapeHtml(r.status)}
+              </span>
+
+              ${
+                r.assignedPosition
+                ?
+                `
+                <br><br>
+
+                Position:
+                <strong>
+                  ${escapeHtml(r.assignedPosition)}
+                </strong>
+                `
+                :
+                ""
+              }
+
+            </div>
+
+          `;
+
+        });
+
+
+        mine.innerHTML =
+          myHtml ||
+          `<p class="empty">
+            You have not sent any requests.
+          </p>`;
+
+
+        /*
+          INCOMING REQUESTS FOR MY TEAMS
+        */
+
+        const teamQuery =
+          query(
+            collection(db, TEAMS),
+            where(
+              "ownerBgmi",
+              "==",
+              profile.bgmi
+            )
+          );
+
+
+        const teamSnapshot =
+          await getDocs(teamQuery);
+
+
+        let incomingHtml = "";
+
+
         for(
-          const notificationDoc
+          const teamDoc
+          of teamSnapshot.docs
+        ){
+
+          const requestQuery =
+            query(
+              collection(db, REQUESTS),
+              where(
+                "teamId",
+                "==",
+                teamDoc.id
+              ),
+              where(
+                "status",
+                "==",
+                "pending"
+              )
+            );
+
+
+          const requests =
+            await getDocs(requestQuery);
+
+
+          requests.forEach(requestDoc => {
+
+            const r =
+              requestDoc.data();
+
+
+            incomingHtml += `
+
+              <div class="notification">
+
+                <h3>
+                  📨 ${escapeHtml(r.playerName)}
+                </h3>
+
+                <p>
+                  wants to join
+                  <strong>
+                    ${escapeHtml(r.teamName)}
+                  </strong>
+                </p>
+
+                <br>
+
+                <p>
+                  BGMI:
+                  ${escapeHtml(r.playerBgmi)}
+                </p>
+
+                <p>
+                  Role:
+                  ${escapeHtml(r.playerRole)}
+                </p>
+
+                <p>
+                  Tier:
+                  ${escapeHtml(r.playerTier)}
+                </p>
+
+                <p>
+                  Language:
+                  ${escapeHtml(r.playerLanguage)}
+                </p>
+
+                <br>
+
+                <button
+                  class="btn"
+                  onclick="acceptRequest('${requestDoc.id}')"
+                >
+                  ✅ ACCEPT
+                </button>
+
+                <button
+                  class="btn danger"
+                  onclick="rejectRequest('${requestDoc.id}')"
+                >
+                  ❌ REJECT
+                </button>
+
+              </div>
+
+            `;
+
+          });
+
+        }
+
+
+        incoming.innerHTML =
+          incomingHtml ||
+          `<p class="empty">
+            No pending requests.
+          </p>`;
+
+
+      }catch(error){
+
+        console.error(error);
+
+        incoming.innerHTML =
+          `<p class="empty">
+            Unable to load requests.
+          </p>`;
+
+        mine.innerHTML =
+          `<p class="empty">
+            Unable to load requests.
+          </p>`;
+
+      }
+
+    };
+
+
+  /* =====================================================
+     LEAVE TEAM
+     ===================================================== */
+
+  window.leaveTeam =
+    async function(teamId){
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        return;
+
+      }
+
+
+      const confirmLeave =
+        confirm(
+          "Are you sure you want to leave this team?"
+        );
+
+
+      if(!confirmLeave){
+
+        return;
+
+      }
+
+
+      try{
+
+        const teamRef =
+          doc(db, TEAMS, teamId);
+
+
+        const teamSnap =
+          await getDoc(teamRef);
+
+
+        if(!teamSnap.exists()){
+
+          alert("Team not found.");
+
+          return;
+
+        }
+
+
+        const team =
+          teamSnap.data();
+
+
+        const members =
+          normalizeMembers(team);
+
+
+        const isOwner =
+          team.ownerBgmi === profile.bgmi;
+
+
+        /*
+          Owner cannot leave while other players
+          are still in the team.
+        */
+
+        if(
+          isOwner &&
+          members.length > 1
+        ){
+
+          alert(
+            "The owner cannot leave while other members are in the team. " +
+            "Remove/transfer the team members first."
+          );
+
+          return;
+
+        }
+
+
+        /*
+          If owner is the only member,
+          delete the team completely.
+        */
+
+        if(
+          isOwner &&
+          members.length === 1
+        ){
+
+          await deleteDoc(teamRef);
+
+
+          alert(
+            "Your empty team was deleted."
+          );
+
+
+        }else{
+
+          const updatedMembers =
+            members.filter(
+              m => m.bgmi !== profile.bgmi
+            );
+
+
+          await updateDoc(
+            teamRef,
+            {
+
+              members:updatedMembers,
+
+              memberBgmis:
+                updatedMembers.map(
+                  m => m.bgmi
+                ),
+
+              memberCount:
+                updatedMembers.length,
+
+              manager:
+                updatedMembers.find(
+                  m => m.position === "manager"
+                ) || null,
+
+              mainPlayers:
+                updatedMembers.filter(
+                  m => m.position === "main"
+                ),
+
+              optionalPlayers:
+                updatedMembers.filter(
+                  m => m.position === "optional"
+                )
+
+            }
+          );
+
+
+          await addDoc(
+            collection(db, NOTIFICATIONS),
+            {
+
+              targetBgmi:team.ownerBgmi,
+
+              title:"👋 Player Left Team",
+
+              message:
+                profile.name +
+                " left your team " +
+                team.name,
+
+              type:"player_left",
+
+              teamId,
+
+              read:false,
+
+              createdAt:new Date()
+
+            }
+          );
+
+
+          alert(
+            "You left the team."
+          );
+
+        }
+
+
+        loadMyProfile();
+
+        loadTeams();
+
+        checkTeamCreationStatus();
+
+
+      }catch(error){
+
+        console.error(error);
+
+        alert(
+          "Unable to leave team: " +
+          error.message
+        );
+
+      }
+
+    };
+
+
+  /* =====================================================
+     NOTIFICATIONS
+     ===================================================== */
+
+  window.loadNotifications =
+    async function(){
+
+      const list =
+        document.getElementById(
+          "notificationsList"
+        );
+
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        list.innerHTML =
+          `<p class="empty">
+            Create a profile first.
+          </p>`;
+
+        return;
+
+      }
+
+
+      list.innerHTML =
+        `<p class="empty">
+          Loading notifications...
+        </p>`;
+
+
+      try{
+
+        const q =
+          query(
+            collection(db, NOTIFICATIONS),
+            where(
+              "targetBgmi",
+              "==",
+              profile.bgmi
+            )
+          );
+
+
+        const snapshot =
+          await getDocs(q);
+
+
+        let notifications =
+          snapshot.docs.map(
+            item => ({
+              id:item.id,
+              ...item.data()
+            })
+          );
+
+
+        notifications.sort(
+          (a,b) =>
+            getTime(b.createdAt) -
+            getTime(a.createdAt)
+        );
+
+
+        let html = "";
+
+
+        notifications.forEach(n => {
+
+          html += `
+
+            <div
+              class="notification ${
+                n.read ? "" : "unread"
+              }"
+            >
+
+              <strong>
+                ${escapeHtml(n.title)}
+              </strong>
+
+              <p>
+                ${escapeHtml(n.message)}
+              </p>
+
+              ${
+                !n.read
+                ?
+                `
+                <br>
+
+                <button
+                  class="btn secondary"
+                  onclick="markNotificationRead('${n.id}')"
+                >
+                  Mark Read
+                </button>
+                `
+                :
+                `
+                <small>Read</small>
+                `
+              }
+
+            </div>
+
+          `;
+
+        });
+
+
+        list.innerHTML =
+          html ||
+          `<p class="empty">
+            No notifications.
+          </p>`;
+
+
+      }catch(error){
+
+        console.error(error);
+
+        list.innerHTML =
+          `<p class="empty">
+            Unable to load notifications.
+          </p>`;
+
+      }
+
+    };
+
+
+  function getTime(timestamp){
+
+    if(!timestamp){
+
+      return 0;
+
+    }
+
+
+    if(
+      typeof timestamp.toDate ===
+      "function"
+    ){
+
+      return timestamp.toDate().getTime();
+
+    }
+
+
+    if(
+      timestamp instanceof Date
+    ){
+
+      return timestamp.getTime();
+
+    }
+
+
+    return 0;
+
+  }
+
+
+  window.markNotificationRead =
+    async function(notificationId){
+
+      try{
+
+        await updateDoc(
+          doc(
+            db,
+            NOTIFICATIONS,
+            notificationId
+          ),
+          {
+            read:true
+          }
+        );
+
+
+        loadNotifications();
+
+
+      }catch(error){
+
+        console.error(error);
+
+      }
+
+    };
+
+
+  window.markAllNotificationsRead =
+    async function(){
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        return;
+
+      }
+
+
+      try{
+
+        const q =
+          query(
+            collection(db, NOTIFICATIONS),
+            where(
+              "targetBgmi",
+              "==",
+              profile.bgmi
+            )
+          );
+
+
+        const snapshot =
+          await getDocs(q);
+
+
+        for(
+          const item
           of snapshot.docs
         ){
 
-          await updateDoc(
+          const n =
+            item.data();
 
-            doc(
-              db,
-              "notifications",
-              notificationDoc.id
-            ),
 
-            {
-              read:true
-            }
+          if(!n.read){
 
-          );
+            await updateDoc(
+              doc(
+                db,
+                NOTIFICATIONS,
+                item.id
+              ),
+              {
+                read:true
+              }
+            );
+
+          }
 
         }
 
 
         loadNotifications();
 
+
+      }catch(error){
+
+        console.error(error);
+
       }
 
-      catch(error){
+    };
+
+
+  /* =====================================================
+     GLOBAL CHAT
+     ===================================================== */
+
+  window.loadChat =
+    async function(){
+
+      const list =
+        document.getElementById(
+          "chatList"
+        );
+
+
+      list.innerHTML =
+        `<p class="empty">
+          Loading chat...
+        </p>`;
+
+
+      try{
+
+        const q =
+          query(
+            collection(db, CHAT),
+            orderBy(
+              "createdAt",
+              "desc"
+            ),
+            limit(50)
+          );
+
+
+        const snapshot =
+          await getDocs(q);
+
+
+        const messages =
+          snapshot.docs
+            .map(item => item.data())
+            .reverse();
+
+
+        let html = "";
+
+
+        messages.forEach(m => {
+
+          const date =
+            getTime(m.createdAt);
+
+
+          html += `
+
+            <div class="chat-message">
+
+              <strong>
+                ${escapeHtml(m.name)}
+              </strong>
+
+              <span>
+                · ${escapeHtml(m.message)}
+              </span>
+
+              <small>
+                ${
+                  date
+                  ?
+                  new Date(date).toLocaleString()
+                  :
+                  ""
+                }
+              </small>
+
+            </div>
+
+          `;
+
+        });
+
+
+        list.innerHTML =
+          html ||
+          `<p class="empty">
+            No messages yet.
+            Start the conversation!
+          </p>`;
+
+
+        list.scrollTop =
+          list.scrollHeight;
+
+
+      }catch(error){
+
+        console.error(error);
+
+        list.innerHTML =
+          `<p class="empty">
+            Unable to load chat.
+          </p>`;
+
+      }
+
+    };
+
+
+  window.sendChatMessage =
+    async function(){
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        alert(
+          "Create a profile before using chat."
+        );
+
+        showSection("profile");
+
+        return;
+
+      }
+
+
+      const input =
+        document.getElementById(
+          "chatMessage"
+        );
+
+
+      const message =
+        input.value.trim();
+
+
+      if(!message){
+
+        return;
+
+      }
+
+
+      if(message.length > 300){
+
+        alert(
+          "Message cannot exceed 300 characters."
+        );
+
+        return;
+
+      }
+
+
+      try{
+
+        await addDoc(
+          collection(db, CHAT),
+          {
+
+            name:profile.name,
+
+            bgmi:profile.bgmi,
+
+            message,
+
+            createdAt:new Date()
+
+          }
+        );
+
+
+        input.value = "";
+
+        loadChat();
+
+
+      }catch(error){
 
         console.error(error);
 
         alert(
-          "Unable to mark notifications."
+          "Unable to send message: " +
+          error.message
         );
 
       }
 
+    };
+
+
+  /* =====================================================
+     ENTER TO SEND CHAT
+     ===================================================== */
+
+  document
+    .getElementById("chatMessage")
+    .addEventListener(
+      "keydown",
+      function(event){
+
+        if(
+          event.key === "Enter"
+        ){
+
+          event.preventDefault();
+
+          sendChatMessage();
+
+        }
+
+      }
+    );
+
+
+  /* =====================================================
+     NOTIFICATION COUNT
+     ===================================================== */
+
+  async function updateNotificationCount(){
+
+    const profile =
+      getMyProfile();
+
+
+    if(!profile){
+
+      return;
+
     }
+
+
+    try{
+
+      const q =
+        query(
+          collection(db, NOTIFICATIONS),
+          where(
+            "targetBgmi",
+            "==",
+            profile.bgmi
+          )
+        );
+
+
+      const snapshot =
+        await getDocs(q);
+
+
+      const unread =
+        snapshot.docs.filter(
+          item =>
+            item.data().read !== true
+        ).length;
+
+
+      const notificationButton =
+        [...document.querySelectorAll("nav button")]
+          .find(
+            button =>
+              button.textContent.includes(
+                "Notifications"
+              )
+          );
+
+
+      if(notificationButton){
+
+        notificationButton.textContent =
+          unread > 0
+          ?
+          `🔔 Notifications (${unread})`
+          :
+          "🔔 Notifications";
+
+      }
+
+
+    }catch(error){
+
+      console.error(error);
+
+    }
+
+  }
+
+
+  /* =====================================================
+     INITIAL LOAD
+     ===================================================== */
+
+  loadMyProfile();
+
+  loadPlayers();
+
+  loadTeams();
+
+  updateNotificationCount();
+
+
+  /*
+    Refresh notifications periodically.
+  */
+
+  setInterval(
+    updateNotificationCount,
+    10000
   );
 
 
-/* =====================================================
-   NOTIFICATION BUTTON
-   ===================================================== */
+  /*
+    Refresh global chat every 5 seconds
+    while chat section is active.
+  */
 
-document
-  .getElementById("notificationButton")
-  .addEventListener(
-    "click",
+  setInterval(
     function(){
 
-      document
-        .getElementById("notifications")
-        .scrollIntoView({
-          behavior:"smooth"
-        });
+      const chatSection =
+        document.getElementById("chat");
 
-    }
+
+      if(
+        chatSection.classList.contains(
+          "active"
+        )
+      ){
+
+        loadChat();
+
+      }
+
+    },
+    5000
   );
 
-
-/* =====================================================
-   PROFILE BUTTON
-   ===================================================== */
-
-document
-  .getElementById("profileButton")
-  .addEventListener(
-    "click",
-    function(){
-
-      document
-        .getElementById("profilePanel")
-        .style.display =
-        "block";
-
-    }
-  );
-
-
-document
-  .getElementById("closeProfile")
-  .addEventListener(
-    "click",
-    function(){
-
-      document
-        .getElementById("profilePanel")
-        .style.display =
-        "none";
-
-    }
-  );
-
-
-document
-  .getElementById("viewMyProfile")
-  .addEventListener(
-    "click",
-    function(){
-
-      document
-        .getElementById("profilePanel")
-        .style.display =
-        "block";
-
-    }
-  );
-
-
-/* =====================================================
-   START
-   ===================================================== */
-
-loadMyProfile();
-
-loadPlayers();
-
-loadSquads();
-
-loadRequests();
-
-loadNotifications();
-
-
-/*
-Refresh notifications periodically.
-This checks for new notifications every 15 seconds.
-*/
-
-setInterval(
-  loadNotifications,
-  15000
-);
 
 </script>
 
