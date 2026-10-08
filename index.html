@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>INSANE VANGUARD ESPORTS</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -47,6 +49,24 @@ button,
   border-radius:8px;
   font-weight:bold;
   cursor:pointer;
+}
+
+button{
+  margin-top:10px;
+}
+
+.green{
+  background:#159447;
+}
+
+.red{
+  background:#c62828;
+}
+
+.action-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
 nav{
@@ -97,12 +117,34 @@ section h2{
 .card,
 .player,
 .squad,
-.request{
+.request,
+.notification{
   background:#151515;
   padding:20px;
   margin:12px 0;
   border-radius:12px;
   border:1px solid #292929;
+}
+
+.notification.unread{
+  border-left:4px solid #ff7a00;
+  background:#1c1c1c;
+}
+
+.notification.read{
+  opacity:.65;
+}
+
+.notification-title{
+  font-size:17px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.notification-time{
+  color:#888;
+  font-size:12px;
+  margin-top:10px;
 }
 
 input,
@@ -115,24 +157,6 @@ textarea{
   color:white;
   border:1px solid #333;
   border-radius:7px;
-}
-
-button{
-  margin-top:10px;
-}
-
-.green{
-  background:#159447;
-}
-
-.red{
-  background:#c62828;
-}
-
-.action-row{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
 }
 
 .empty{
@@ -165,7 +189,33 @@ button{
   margin:10px 0;
 }
 
+.notification-button{
+  position:relative;
+  margin-right:8px;
+}
+
+.notification-count{
+  position:absolute;
+  top:-7px;
+  right:-7px;
+  background:#e53935;
+  color:white;
+  font-size:11px;
+  min-width:20px;
+  height:20px;
+  border-radius:50%;
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+}
+
 @media(max-width:600px){
+
   header h1{
     font-size:17px;
   }
@@ -174,7 +224,8 @@ button{
     font-size:12px;
   }
 
-  .profile-button{
+  .profile-button,
+  .notification-button{
     padding:9px;
     font-size:12px;
   }
@@ -182,137 +233,256 @@ button{
   .hero h2{
     font-size:30px;
   }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
+
   <div>
     <h1>INSANE VANGUARD ESPORTS</h1>
     <p>BGMI Esports Community</p>
   </div>
 
-  <button class="profile-button" id="profileButton">
-    👤 Profile
-  </button>
+  <div class="header-actions">
+
+    <button
+      class="notification-button"
+      id="notificationButton">
+
+      🔔
+
+      <span
+        id="notificationCount"
+        class="notification-count">
+        0
+      </span>
+
+    </button>
+
+    <button
+      class="profile-button"
+      id="profileButton">
+
+      👤 Profile
+
+    </button>
+
+  </div>
+
 </header>
 
+
 <nav>
+
   <a href="#home">Home</a>
   <a href="#find">Profile</a>
   <a href="#players">Players</a>
   <a href="#squads">Find Squad</a>
   <a href="#makeSquad">Make Squad</a>
   <a href="#requests">Requests</a>
+  <a href="#notifications">Notifications 🔔</a>
+
 </nav>
 
-<div id="profilePanel" class="profile-panel">
+
+<div
+  id="profilePanel"
+  class="profile-panel">
+
   <h2>👤 My Profile</h2>
 
-  <p><b>IGN:</b> <span id="profileName">Not set</span></p>
-  <p><b>BGMI ID:</b> <span id="profileBgmi">Not set</span></p>
-  <p><b>Role:</b> <span id="profileRole">Not set</span></p>
-  <p><b>Tier:</b> <span id="profileTier">Not set</span></p>
-  <p><b>Language:</b> <span id="profileLanguage">Not set</span></p>
+  <p>
+    <b>IGN:</b>
+    <span id="profileName">Not set</span>
+  </p>
 
-  <button id="closeProfile">Close</button>
+  <p>
+    <b>BGMI ID:</b>
+    <span id="profileBgmi">Not set</span>
+  </p>
+
+  <p>
+    <b>Role:</b>
+    <span id="profileRole">Not set</span>
+  </p>
+
+  <p>
+    <b>Tier:</b>
+    <span id="profileTier">Not set</span>
+  </p>
+
+  <p>
+    <b>Language:</b>
+    <span id="profileLanguage">Not set</span>
+  </p>
+
+  <button id="closeProfile">
+    Close
+  </button>
+
 </div>
 
+
 <section class="hero" id="home">
-  <h2>BUILD YOUR <span>SQUAD</span></h2>
-  <p>Find BGMI teammates, create your squad and compete together.</p>
-  <a class="button" href="#squads">🔎 FIND SQUAD</a>
+
+  <h2>
+    BUILD YOUR <span>SQUAD</span>
+  </h2>
+
+  <p>
+    Find BGMI teammates, create your squad and compete together.
+  </p>
+
+  <a
+    class="button"
+    href="#squads">
+
+    🔎 FIND SQUAD
+
+  </a>
+
 </section>
 
+
 <section id="find">
+
   <h2>MAKE YOUR PROFILE</h2>
 
-  <div class="card" id="profileForm">
+  <div
+    class="card"
+    id="profileForm">
 
-    <input id="playerName" type="text" placeholder="Player Name / IGN">
+    <input
+      id="playerName"
+      type="text"
+      placeholder="Player Name / IGN">
 
-    <input id="bgmiId" type="text" placeholder="BGMI ID">
+    <input
+      id="bgmiId"
+      type="text"
+      placeholder="BGMI ID">
 
     <select id="role">
-      <option value="">Select Role</option>
+
+      <option value="">
+        Select Role
+      </option>
+
       <option>IGL</option>
       <option>Assaulter</option>
       <option>Support</option>
       <option>Sniper</option>
       <option>Entry Fragger</option>
+
     </select>
 
     <select id="tier">
-      <option value="">Select Tier</option>
+
+      <option value="">
+        Select Tier
+      </option>
+
       <option>Conqueror</option>
       <option>Ace Master</option>
       <option>Ace Dominator</option>
       <option>Ace</option>
       <option>Crown</option>
+
     </select>
 
     <select id="language">
-      <option value="">Select Language</option>
+
+      <option value="">
+        Select Language
+      </option>
+
       <option>Hindi</option>
       <option>English</option>
       <option>Marathi</option>
       <option>Hinglish</option>
+
     </select>
 
-    <textarea id="aboutPlayer" rows="4"
-      placeholder="Tell us about yourself"></textarea>
+    <textarea
+      id="aboutPlayer"
+      rows="4"
+      placeholder="Tell us about yourself">
+    </textarea>
 
     <button id="joinButton">
       CREATE MY PROFILE 🔥
     </button>
+
   </div>
 
-  <div id="profileCreatedMessage"
-       class="card"
-       style="display:none;">
+
+  <div
+    id="profileCreatedMessage"
+    class="card"
+    style="display:none;">
 
     <h2>🔥 PROFILE CREATED</h2>
 
-    <p>Your BGMI profile is ready!</p>
+    <p>
+      Your BGMI profile is ready!
+    </p>
 
     <button id="viewMyProfile">
       VIEW MY PROFILE 👤
     </button>
 
   </div>
+
 </section>
 
+
 <section id="players">
+
   <h2>👥 PLAYERS</h2>
 
   <input
     type="text"
     id="searchPlayers"
-    placeholder="🔎 Search players..."
-  >
+    placeholder="🔎 Search players...">
 
   <div id="playerList">
-    <p class="empty">Loading players...</p>
+
+    <p class="empty">
+      Loading players...
+    </p>
+
   </div>
+
 </section>
 
+
 <section id="squads">
+
   <h2>🔎 FIND SQUAD</h2>
 
   <input
     type="text"
     id="searchSquads"
-    placeholder="🔎 Search squad..."
-  >
+    placeholder="🔎 Search squad...">
 
   <div id="squadList">
-    <p class="empty">Loading squads...</p>
+
+    <p class="empty">
+      Loading squads...
+    </p>
+
   </div>
+
 </section>
 
+
 <section id="makeSquad">
+
   <h2>🛡️ MAKE YOUR SQUAD</h2>
 
   <div class="card">
@@ -320,33 +490,47 @@ button{
     <input
       id="squadName"
       type="text"
-      placeholder="Squad Name"
-    >
+      placeholder="Squad Name">
 
     <select id="squadRole">
-      <option value="">Looking for Role</option>
+
+      <option value="">
+        Looking for Role
+      </option>
+
       <option>IGL</option>
       <option>Assaulter</option>
       <option>Support</option>
       <option>Sniper</option>
       <option>Entry Fragger</option>
+
     </select>
 
     <select id="squadTier">
-      <option value="">Required Tier</option>
+
+      <option value="">
+        Required Tier
+      </option>
+
       <option>Conqueror</option>
       <option>Ace Master</option>
       <option>Ace Dominator</option>
       <option>Ace</option>
       <option>Crown</option>
+
     </select>
 
     <select id="squadLanguage">
-      <option value="">Squad Language</option>
+
+      <option value="">
+        Squad Language
+      </option>
+
       <option>Hindi</option>
       <option>English</option>
       <option>Marathi</option>
       <option>Hinglish</option>
+
     </select>
 
     <input
@@ -354,8 +538,7 @@ button{
       type="number"
       min="1"
       max="3"
-      placeholder="Players Needed"
-    >
+      placeholder="Players Needed">
 
     <textarea
       id="squadDescription"
@@ -368,15 +551,47 @@ button{
     </button>
 
   </div>
+
 </section>
 
+
 <section id="requests">
+
   <h2>📨 SQUAD REQUESTS</h2>
 
   <div id="requestList">
-    <p class="empty">Create a profile to see requests.</p>
+
+    <p class="empty">
+      Create a profile to see requests.
+    </p>
+
   </div>
+
 </section>
+
+
+<section id="notifications">
+
+  <h2>🔔 NOTIFICATIONS</h2>
+
+  <button
+    id="markAllRead"
+    class="green">
+
+    ✓ MARK ALL AS READ
+
+  </button>
+
+  <div id="notificationList">
+
+    <p class="empty">
+      No notifications.
+    </p>
+
+  </div>
+
+</section>
+
 
 <script type="module">
 
@@ -384,6 +599,7 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
+
   getFirestore,
   collection,
   addDoc,
@@ -392,69 +608,104 @@ import {
   where,
   updateDoc,
   doc,
-  getDoc
+  getDoc,
+  orderBy
+
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 /* =====================================================
-   IMPORTANT:
-   KEEP YOUR REAL FIREBASE CONFIG HERE
+   FIREBASE CONFIG
+   PASTE YOUR FIREBASE CONFIG HERE
    ===================================================== */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDhwR5Wk7_odWgLUyqKEtS5BS-22vBFGuI",
-  authDomain: "insanevanguardesports.firebaseapp.com",
-  projectId: "insanevanguardesports",
-  storageBucket: "insanevanguardesports.firebasestorage.app",
-  messagingSenderId: "997549369698",
-  appId: "1:997549369698:web:cdd921cf8510bb0fa6643b"
+
+  apiKey: "YOUR_API_KEY",
+
+  authDomain:
+    "YOUR_PROJECT.firebaseapp.com",
+
+  projectId:
+    "YOUR_PROJECT_ID",
+
+  storageBucket:
+    "YOUR_PROJECT.firebasestorage.app",
+
+  messagingSenderId:
+    "YOUR_SENDER_ID",
+
+  appId:
+    "YOUR_APP_ID"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+/* =====================================================
+   FIREBASE
+   ===================================================== */
+
+const app =
+  initializeApp(firebaseConfig);
+
+const db =
+  getFirestore(app);
 
 
-/* ================= PROFILE ================= */
+/* =====================================================
+   PROFILE
+   ===================================================== */
+
+function getMyProfile(){
+
+  return JSON.parse(
+    localStorage.getItem("myProfile")
+  );
+
+}
+
 
 function loadMyProfile(){
 
   const profile =
-    JSON.parse(localStorage.getItem("myProfile"));
+    getMyProfile();
 
   if(!profile) return;
 
-  document.getElementById("profileName").textContent =
-    profile.name;
+  document.getElementById("profileName")
+    .textContent = profile.name;
 
-  document.getElementById("profileBgmi").textContent =
-    profile.bgmi;
+  document.getElementById("profileBgmi")
+    .textContent = profile.bgmi;
 
-  document.getElementById("profileRole").textContent =
-    profile.role;
+  document.getElementById("profileRole")
+    .textContent = profile.role;
 
-  document.getElementById("profileTier").textContent =
-    profile.tier;
+  document.getElementById("profileTier")
+    .textContent = profile.tier;
 
-  document.getElementById("profileLanguage").textContent =
-    profile.language;
+  document.getElementById("profileLanguage")
+    .textContent = profile.language;
 
-  document.getElementById("profileForm").style.display =
-    "none";
+  document.getElementById("profileForm")
+    .style.display = "none";
 
   document.getElementById("profileCreatedMessage")
     .style.display = "block";
+
 }
 
 
 async function createProfile(){
 
   const name =
-    document.getElementById("playerName").value.trim();
+    document.getElementById("playerName")
+    .value.trim();
 
   const bgmi =
-    document.getElementById("bgmiId").value.trim();
+    document.getElementById("bgmiId")
+    .value.trim();
 
   const role =
     document.getElementById("role").value;
@@ -466,13 +717,24 @@ async function createProfile(){
     document.getElementById("language").value;
 
   const about =
-    document.getElementById("aboutPlayer").value.trim();
+    document.getElementById("aboutPlayer")
+    .value.trim();
 
 
-  if(!name || !bgmi || !role || !tier || !language){
+  if(
+    !name ||
+    !bgmi ||
+    !role ||
+    !tier ||
+    !language
+  ){
 
-    alert("Please fill all required fields.");
+    alert(
+      "Please fill all required fields."
+    );
+
     return;
+
   }
 
 
@@ -481,24 +743,30 @@ async function createProfile(){
     await addDoc(
       collection(db,"players"),
       {
+
         name,
         bgmi,
         role,
         tier,
         language,
         about,
-        createdAt:new Date()
+
+        createdAt:
+          new Date()
+
       }
     );
 
 
     const profile = {
+
       name,
       bgmi,
       role,
       tier,
       language,
       about
+
     };
 
 
@@ -510,27 +778,39 @@ async function createProfile(){
 
     loadMyProfile();
 
-    alert("🔥 Profile created successfully!");
+    alert(
+      "🔥 Profile created successfully!"
+    );
 
     loadPlayers();
 
   }
+
   catch(error){
 
     console.error(error);
 
     alert(
-      "Firebase error: " + error.message
+      "Firebase error: " +
+      error.message
     );
+
   }
+
 }
 
 
-document.getElementById("joinButton")
-.addEventListener("click",createProfile);
+document
+  .getElementById("joinButton")
+  .addEventListener(
+    "click",
+    createProfile
+  );
 
 
-/* ================= PLAYERS ================= */
+/* =====================================================
+   PLAYERS
+   ===================================================== */
 
 async function loadPlayers(){
 
@@ -540,9 +820,12 @@ async function loadPlayers(){
   try{
 
     const snapshot =
-      await getDocs(collection(db,"players"));
+      await getDocs(
+        collection(db,"players")
+      );
 
     list.innerHTML = "";
+
 
     if(snapshot.empty){
 
@@ -550,25 +833,47 @@ async function loadPlayers(){
         '<p class="empty">No players joined yet.</p>';
 
       return;
+
     }
 
 
     snapshot.forEach(item => {
 
-      const p = item.data();
+      const p =
+        item.data();
 
       const div =
         document.createElement("div");
 
-      div.className = "player";
+      div.className =
+        "player";
 
       div.innerHTML = `
-        <h3>👤 ${p.name || "Player"}</h3>
-        <p>🎯 Role: ${p.role || "-"}</p>
-        <p>🏆 Tier: ${p.tier || "-"}</p>
-        <p>🌐 Language: ${p.language || "-"}</p>
-        <p>🆔 BGMI ID: ${p.bgmi || "-"}</p>
-        <p>${p.about || ""}</p>
+
+        <h3>
+          👤 ${p.name || "Player"}
+        </h3>
+
+        <p>
+          🎯 Role: ${p.role || "-"}
+        </p>
+
+        <p>
+          🏆 Tier: ${p.tier || "-"}
+        </p>
+
+        <p>
+          🌐 Language: ${p.language || "-"}
+        </p>
+
+        <p>
+          🆔 BGMI ID: ${p.bgmi || "-"}
+        </p>
+
+        <p>
+          ${p.about || ""}
+        </p>
+
       `;
 
       list.appendChild(div);
@@ -576,84 +881,113 @@ async function loadPlayers(){
     });
 
   }
+
   catch(error){
 
     console.error(error);
 
     list.innerHTML =
       '<p class="empty">Unable to load players.</p>';
+
   }
+
 }
 
 
-/* PLAYER SEARCH */
+document
+  .getElementById("searchPlayers")
+  .addEventListener(
+    "input",
+    function(){
 
-document.getElementById("searchPlayers")
-.addEventListener("input",function(){
+      const search =
+        this.value.toLowerCase();
 
-  const search =
-    this.value.toLowerCase();
+      document
+        .querySelectorAll(".player")
+        .forEach(player => {
 
-  document
-    .querySelectorAll(".player")
-    .forEach(player => {
+          player.style.display =
+            player.textContent
+            .toLowerCase()
+            .includes(search)
+            ? "block"
+            : "none";
 
-      player.style.display =
-        player.textContent
-        .toLowerCase()
-        .includes(search)
-        ? "block"
-        : "none";
+        });
 
-    });
-
-});
+    }
+  );
 
 
-/* ================= CREATE SQUAD ================= */
+/* =====================================================
+   CREATE SQUAD
+   ===================================================== */
 
 async function createSquad(){
 
   const profile =
-    JSON.parse(localStorage.getItem("myProfile"));
+    getMyProfile();
 
 
   if(!profile){
 
-    alert("Please create your profile first.");
+    alert(
+      "Please create your profile first."
+    );
+
     return;
+
   }
 
 
   const name =
-    document.getElementById("squadName")
-    .value.trim();
+    document
+      .getElementById("squadName")
+      .value.trim();
 
   const requiredRole =
-    document.getElementById("squadRole").value;
+    document
+      .getElementById("squadRole")
+      .value;
 
   const requiredTier =
-    document.getElementById("squadTier").value;
+    document
+      .getElementById("squadTier")
+      .value;
 
   const language =
-    document.getElementById("squadLanguage").value;
+    document
+      .getElementById("squadLanguage")
+      .value;
 
   const slots =
     Number(
-      document.getElementById("squadSlots").value
+      document
+        .getElementById("squadSlots")
+        .value
     );
 
   const description =
-    document.getElementById("squadDescription")
-    .value.trim();
+    document
+      .getElementById("squadDescription")
+      .value.trim();
 
 
-  if(!name || !requiredRole ||
-     !requiredTier || !language ||
-     !slots){
+  if(
+    !name ||
+    !requiredRole ||
+    !requiredTier ||
+    !language ||
+    !slots
+  ){
 
-    alert("Please fill all squad fields.");
+    alert(
+      "Please fill all squad fields."
+    );
+
     return;
+
   }
 
 
@@ -662,34 +996,65 @@ async function createSquad(){
     await addDoc(
       collection(db,"squads"),
       {
+
         name,
-        leaderName:profile.name,
-        leaderBgmi:profile.bgmi,
+
+        leaderName:
+          profile.name,
+
+        leaderBgmi:
+          profile.bgmi,
+
         requiredRole,
+
         requiredTier,
+
         language,
+
         slots,
+
         description,
-        members:[profile.name],
+
+        members:[
+          profile.name
+        ],
+
         memberCount:1,
-        createdAt:new Date()
+
+        createdAt:
+          new Date()
+
       }
     );
 
 
-    document.getElementById("squadName").value="";
-    document.getElementById("squadRole").value="";
-    document.getElementById("squadTier").value="";
-    document.getElementById("squadLanguage").value="";
-    document.getElementById("squadSlots").value="";
-    document.getElementById("squadDescription").value="";
+    document.getElementById("squadName")
+      .value = "";
+
+    document.getElementById("squadRole")
+      .value = "";
+
+    document.getElementById("squadTier")
+      .value = "";
+
+    document.getElementById("squadLanguage")
+      .value = "";
+
+    document.getElementById("squadSlots")
+      .value = "";
+
+    document.getElementById("squadDescription")
+      .value = "";
 
 
-    alert("🛡️ Squad created successfully!");
+    alert(
+      "🛡️ Squad created successfully!"
+    );
 
     loadSquads();
 
   }
+
   catch(error){
 
     console.error(error);
@@ -698,15 +1063,23 @@ async function createSquad(){
       "Error creating squad: " +
       error.message
     );
+
   }
+
 }
 
 
-document.getElementById("createSquadButton")
-.addEventListener("click",createSquad);
+document
+  .getElementById("createSquadButton")
+  .addEventListener(
+    "click",
+    createSquad
+  );
 
 
-/* ================= FIND SQUADS ================= */
+/* =====================================================
+   FIND SQUADS
+   ===================================================== */
 
 async function loadSquads(){
 
@@ -717,7 +1090,9 @@ async function loadSquads(){
   try{
 
     const snapshot =
-      await getDocs(collection(db,"squads"));
+      await getDocs(
+        collection(db,"squads")
+      );
 
     list.innerHTML = "";
 
@@ -728,32 +1103,63 @@ async function loadSquads(){
         '<p class="empty">No squads available yet.</p>';
 
       return;
+
     }
 
 
     snapshot.forEach(item => {
 
-      const s = item.data();
+      const s =
+        item.data();
 
       const div =
         document.createElement("div");
 
-      div.className = "squad";
+      div.className =
+        "squad";
+
 
       div.innerHTML = `
-        <h3>🛡️ ${s.name}</h3>
-        <p>👑 Leader: ${s.leaderName}</p>
-        <p>🎯 Looking for: ${s.requiredRole}</p>
-        <p>🏆 Required Tier: ${s.requiredTier}</p>
-        <p>🌐 Language: ${s.language}</p>
-        <p>👥 Members: ${s.memberCount || 1}</p>
-        <p>📌 Players Needed: ${s.slots}</p>
-        <p>${s.description || ""}</p>
+
+        <h3>
+          🛡️ ${s.name}
+        </h3>
+
+        <p>
+          👑 Leader: ${s.leaderName}
+        </p>
+
+        <p>
+          🎯 Looking for: ${s.requiredRole}
+        </p>
+
+        <p>
+          🏆 Required Tier: ${s.requiredTier}
+        </p>
+
+        <p>
+          🌐 Language: ${s.language}
+        </p>
+
+        <p>
+          👥 Members: ${s.memberCount || 1}
+        </p>
+
+        <p>
+          📌 Players Needed: ${s.slots}
+        </p>
+
+        <p>
+          ${s.description || ""}
+        </p>
 
         <button
           onclick="sendRequest('${item.id}')">
+
           📩 SEND JOIN REQUEST
+
         </button>
+
       `;
 
       list.appendChild(div);
@@ -761,95 +1167,272 @@ async function loadSquads(){
     });
 
   }
+
   catch(error){
 
     console.error(error);
 
     list.innerHTML =
       '<p class="empty">Unable to load squads.</p>';
+
   }
+
 }
 
 
-/* SQUAD SEARCH */
+document
+  .getElementById("searchSquads")
+  .addEventListener(
+    "input",
+    function(){
 
-document.getElementById("searchSquads")
-.addEventListener("input",function(){
+      const search =
+        this.value.toLowerCase();
 
-  const search =
-    this.value.toLowerCase();
+      document
+        .querySelectorAll(".squad")
+        .forEach(squad => {
 
-  document
-    .querySelectorAll(".squad")
-    .forEach(squad => {
+          squad.style.display =
+            squad.textContent
+            .toLowerCase()
+            .includes(search)
+            ? "block"
+            : "none";
 
-      squad.style.display =
-        squad.textContent
-        .toLowerCase()
-        .includes(search)
-        ? "block"
-        : "none";
+        });
 
-    });
-
-});
+    }
+  );
 
 
-/* ================= SEND REQUEST ================= */
+/* =====================================================
+   CREATE NOTIFICATION
+   ===================================================== */
+
+async function createNotification(
+  targetBgmi,
+  title,
+  message,
+  type
+){
+
+  try{
+
+    await addDoc(
+      collection(
+        db,
+        "notifications"
+      ),
+      {
+
+        targetBgmi,
+
+        title,
+
+        message,
+
+        type,
+
+        read:false,
+
+        createdAt:
+          new Date()
+
+      }
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Notification error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   SEND JOIN REQUEST
+   ===================================================== */
 
 window.sendRequest =
 async function(squadId){
 
   const profile =
-    JSON.parse(localStorage.getItem("myProfile"));
+    getMyProfile();
 
 
   if(!profile){
 
-    alert("Please create your profile first.");
+    alert(
+      "Please create your profile first."
+    );
+
     return;
+
   }
 
 
   try{
 
-    /* Check if request already exists */
+    const squadRef =
+      doc(
+        db,
+        "squads",
+        squadId
+      );
+
+    const squadSnap =
+      await getDoc(
+        squadRef
+      );
+
+
+    if(!squadSnap.exists()){
+
+      alert(
+        "Squad not found."
+      );
+
+      return;
+
+    }
+
+
+    const squad =
+      squadSnap.data();
+
+
+    if(
+      Number(squad.slots) <= 0
+    ){
+
+      alert(
+        "❌ No player slots available."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      squad.leaderBgmi ===
+      profile.bgmi
+    ){
+
+      alert(
+        "You are already the squad leader."
+      );
+
+      return;
+
+    }
+
 
     const existing =
       await getDocs(
         query(
-          collection(db,"squadRequests"),
-          where("squadId","==",squadId),
-          where("playerBgmi","==",profile.bgmi)
+          collection(
+            db,
+            "squadRequests"
+          ),
+
+          where(
+            "squadId",
+            "==",
+            squadId
+          ),
+
+          where(
+            "playerBgmi",
+            "==",
+            profile.bgmi
+          ),
+
+          where(
+            "status",
+            "==",
+            "pending"
+          )
+
         )
       );
 
 
     if(!existing.empty){
 
-      alert("You already sent a request.");
+      alert(
+        "You already sent a request."
+      );
+
       return;
+
     }
 
 
     await addDoc(
-      collection(db,"squadRequests"),
+      collection(
+        db,
+        "squadRequests"
+      ),
       {
+
         squadId,
-        playerName:profile.name,
-        playerBgmi:profile.bgmi,
-        playerRole:profile.role,
-        playerTier:profile.tier,
-        playerLanguage:profile.language,
-        status:"pending",
-        createdAt:new Date()
+
+        playerName:
+          profile.name,
+
+        playerBgmi:
+          profile.bgmi,
+
+        playerRole:
+          profile.role,
+
+        playerTier:
+          profile.tier,
+
+        playerLanguage:
+          profile.language,
+
+        status:
+          "pending",
+
+        createdAt:
+          new Date()
+
       }
     );
 
 
-    alert("📩 Join request sent!");
+    /* SEND NOTIFICATION TO LEADER */
+
+    await createNotification(
+
+      squad.leaderBgmi,
+
+      "📩 New Squad Request",
+
+      profile.name +
+      " wants to join your squad " +
+      squad.name,
+
+      "join_request"
+
+    );
+
+
+    alert(
+      "📩 Join request sent!"
+    );
 
   }
+
   catch(error){
 
     console.error(error);
@@ -858,20 +1441,25 @@ async function(squadId){
       "Error sending request: " +
       error.message
     );
+
   }
 
 };
 
 
-/* ================= REQUESTS ================= */
+/* =====================================================
+   LOAD REQUESTS
+   ===================================================== */
 
 async function loadRequests(){
 
   const list =
-    document.getElementById("requestList");
+    document.getElementById(
+      "requestList"
+    );
 
   const profile =
-    JSON.parse(localStorage.getItem("myProfile"));
+    getMyProfile();
 
 
   if(!profile){
@@ -880,6 +1468,7 @@ async function loadRequests(){
       '<p class="empty">Create a profile first.</p>';
 
     return;
+
   }
 
 
@@ -888,28 +1477,30 @@ async function loadRequests(){
     const squadsSnapshot =
       await getDocs(
         query(
-          collection(db,"squads"),
-          where("leaderBgmi","==",profile.bgmi)
+          collection(
+            db,
+            "squads"
+          ),
+
+          where(
+            "leaderBgmi",
+            "==",
+            profile.bgmi
+          )
+
         )
       );
 
 
     list.innerHTML = "";
 
-
-    if(squadsSnapshot.empty){
-
-      list.innerHTML =
-        '<p class="empty">You have no squads yet.</p>';
-
-      return;
-    }
-
-
     let found = false;
 
 
-    for(const squadDoc of squadsSnapshot.docs){
+    for(
+      const squadDoc
+      of squadsSnapshot.docs
+    ){
 
       const squad =
         squadDoc.data();
@@ -918,60 +1509,110 @@ async function loadRequests(){
       const requestsSnapshot =
         await getDocs(
           query(
-            collection(db,"squadRequests"),
-            where("squadId","==",squadDoc.id),
-            where("status","==","pending")
+            collection(
+              db,
+              "squadRequests"
+            ),
+
+            where(
+              "squadId",
+              "==",
+              squadDoc.id
+            ),
+
+            where(
+              "status",
+              "==",
+              "pending"
+            )
+
           )
         );
 
 
-      requestsSnapshot.forEach(requestDoc => {
+      requestsSnapshot.forEach(
+        requestDoc => {
 
-        found = true;
+          found = true;
 
-        const r =
-          requestDoc.data();
+          const r =
+            requestDoc.data();
 
-        const div =
-          document.createElement("div");
+          const div =
+            document.createElement(
+              "div"
+            );
 
-        div.className = "request";
+          div.className =
+            "request";
 
-        div.innerHTML = `
-          <h3>📩 ${r.playerName}</h3>
 
-          <p>🛡️ Squad: ${squad.name}</p>
-          <p>🎯 Role: ${r.playerRole}</p>
-          <p>🏆 Tier: ${r.playerTier}</p>
-          <p>🌐 Language: ${r.playerLanguage}</p>
-          <p>🆔 BGMI ID: ${r.playerBgmi}</p>
+          div.innerHTML = `
 
-          <div class="action-row">
+            <h3>
+              📩 ${r.playerName}
+            </h3>
 
-            <button
-              class="green"
-              onclick="acceptRequest(
-                '${requestDoc.id}',
-                '${squadDoc.id}',
-                '${r.playerName}'
-              )">
-              ✅ ACCEPT
-            </button>
+            <p>
+              🛡️ Squad:
+              ${squad.name}
+            </p>
 
-            <button
-              class="red"
-              onclick="rejectRequest(
-                '${requestDoc.id}'
-              )">
-              ❌ REJECT
-            </button>
+            <p>
+              🎯 Role:
+              ${r.playerRole}
+            </p>
 
-          </div>
-        `;
+            <p>
+              🏆 Tier:
+              ${r.playerTier}
+            </p>
 
-        list.appendChild(div);
+            <p>
+              🌐 Language:
+              ${r.playerLanguage}
+            </p>
 
-      });
+            <p>
+              🆔 BGMI ID:
+              ${r.playerBgmi}
+            </p>
+
+            <div class="action-row">
+
+              <button
+                class="green"
+                onclick="acceptRequest(
+                  '${requestDoc.id}',
+                  '${squadDoc.id}',
+                  '${r.playerName}',
+                  '${r.playerBgmi}'
+                )">
+
+                ✅ ACCEPT
+
+              </button>
+
+              <button
+                class="red"
+                onclick="rejectRequest(
+                  '${requestDoc.id}',
+                  '${r.playerBgmi}',
+                  '${squad.name}'
+                )">
+
+                ❌ REJECT
+
+              </button>
+
+            </div>
+
+          `;
+
+          list.appendChild(div);
+
+        }
+      );
 
     }
 
@@ -980,37 +1621,60 @@ async function loadRequests(){
 
       list.innerHTML =
         '<p class="empty">No pending squad requests.</p>';
+
     }
 
   }
+
   catch(error){
 
     console.error(error);
 
     list.innerHTML =
-      '<p class="empty">Unable to load requests.</p>';
+      '<p class="empty">
+        Unable to load requests.
+      </p>';
+
   }
+
 }
 
 
-/* ================= ACCEPT ================= */
+/* =====================================================
+   ACCEPT REQUEST
+   ===================================================== */
 
 window.acceptRequest =
-async function(requestId,squadId,playerName){
+async function(
+  requestId,
+  squadId,
+  playerName,
+  playerBgmi
+){
 
   try{
 
     const squadRef =
-      doc(db,"squads",squadId);
+      doc(
+        db,
+        "squads",
+        squadId
+      );
 
     const squadSnap =
-      await getDoc(squadRef);
+      await getDoc(
+        squadRef
+      );
 
 
     if(!squadSnap.exists()){
 
-      alert("Squad not found.");
+      alert(
+        "Squad not found."
+      );
+
       return;
+
     }
 
 
@@ -1018,49 +1682,99 @@ async function(requestId,squadId,playerName){
       squadSnap.data();
 
 
-    if(Number(squad.slots) <= 0){
+    if(
+      Number(squad.slots) <= 0
+    ){
 
-      alert("❌ No player slots available.");
+      alert(
+        "❌ No player slots available."
+      );
+
       return;
+
     }
 
 
     const members =
-      Array.isArray(squad.members)
+      Array.isArray(
+        squad.members
+      )
       ? squad.members
       : [];
 
 
-    if(!members.includes(playerName)){
+    if(
+      !members.includes(
+        playerName
+      )
+    ){
 
-      members.push(playerName);
+      members.push(
+        playerName
+      );
+
     }
 
 
     await updateDoc(
       squadRef,
       {
+
         members,
-        memberCount:members.length,
-        slots:Number(squad.slots)-1
+
+        memberCount:
+          members.length,
+
+        slots:
+          Number(squad.slots) - 1
+
       }
     );
 
 
     await updateDoc(
-      doc(db,"squadRequests",requestId),
+      doc(
+        db,
+        "squadRequests",
+        requestId
+      ),
       {
-        status:"accepted"
+
+        status:
+          "accepted"
+
       }
     );
 
 
-    alert("✅ Player accepted!");
+    /* NOTIFY PLAYER */
+
+    await createNotification(
+
+      playerBgmi,
+
+      "✅ Request Accepted",
+
+      "Your request to join " +
+      squad.name +
+      " has been accepted!",
+
+      "request_accepted"
+
+    );
+
+
+    alert(
+      "✅ Player accepted!"
+    );
+
 
     loadSquads();
+
     loadRequests();
 
   }
+
   catch(error){
 
     console.error(error);
@@ -1069,31 +1783,66 @@ async function(requestId,squadId,playerName){
       "Error accepting request: " +
       error.message
     );
+
   }
 
 };
 
 
-/* ================= REJECT ================= */
+/* =====================================================
+   REJECT REQUEST
+   ===================================================== */
 
 window.rejectRequest =
-async function(requestId){
+async function(
+  requestId,
+  playerBgmi,
+  squadName
+){
 
   try{
 
     await updateDoc(
-      doc(db,"squadRequests",requestId),
+      doc(
+        db,
+        "squadRequests",
+        requestId
+      ),
       {
-        status:"rejected"
+
+        status:
+          "rejected"
+
       }
     );
 
 
-    alert("❌ Request rejected.");
+    /* NOTIFY PLAYER */
+
+    await createNotification(
+
+      playerBgmi,
+
+      "❌ Request Rejected",
+
+      "Your request to join " +
+      squadName +
+      " was rejected.",
+
+      "request_rejected"
+
+    );
+
+
+    alert(
+      "❌ Request rejected."
+    );
+
 
     loadRequests();
 
   }
+
   catch(error){
 
     console.error(error);
@@ -1102,46 +1851,484 @@ async function(requestId){
       "Error rejecting request: " +
       error.message
     );
+
   }
 
 };
 
 
-/* ================= PROFILE BUTTON ================= */
+/* =====================================================
+   LOAD NOTIFICATIONS
+   ===================================================== */
 
-document.getElementById("profileButton")
-.addEventListener("click",function(){
+async function loadNotifications(){
 
-  document.getElementById("profilePanel")
-    .style.display = "block";
+  const list =
+    document.getElementById(
+      "notificationList"
+    );
 
-});
+  const count =
+    document.getElementById(
+      "notificationCount"
+    );
 
-
-document.getElementById("closeProfile")
-.addEventListener("click",function(){
-
-  document.getElementById("profilePanel")
-    .style.display = "none";
-
-});
-
-
-document.getElementById("viewMyProfile")
-.addEventListener("click",function(){
-
-  document.getElementById("profilePanel")
-    .style.display = "block";
-
-});
+  const profile =
+    getMyProfile();
 
 
-/* ================= START ================= */
+  if(!profile){
+
+    list.innerHTML =
+      '<p class="empty">Create a profile first.</p>';
+
+    count.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  try{
+
+    const snapshot =
+      await getDocs(
+        query(
+          collection(
+            db,
+            "notifications"
+          ),
+
+          where(
+            "targetBgmi",
+            "==",
+            profile.bgmi
+          )
+
+        )
+      );
+
+
+    list.innerHTML = "";
+
+    let unread = 0;
+
+
+    const notifications =
+      [];
+
+
+    snapshot.forEach(
+      notificationDoc => {
+
+        notifications.push({
+
+          id:
+            notificationDoc.id,
+
+          ...notificationDoc.data()
+
+        });
+
+      }
+    );
+
+
+    notifications.sort(
+      (a,b) => {
+
+        const aTime =
+          a.createdAt?.seconds ||
+          0;
+
+        const bTime =
+          b.createdAt?.seconds ||
+          0;
+
+        return bTime - aTime;
+
+      }
+    );
+
+
+    if(
+      notifications.length === 0
+    ){
+
+      list.innerHTML =
+        '<p class="empty">No notifications yet.</p>';
+
+      count.style.display =
+        "none";
+
+      return;
+
+    }
+
+
+    notifications.forEach(
+      n => {
+
+        if(!n.read){
+
+          unread++;
+
+        }
+
+
+        const div =
+          document.createElement(
+            "div"
+          );
+
+
+        div.className =
+          "notification " +
+          (
+            n.read
+            ? "read"
+            : "unread"
+          );
+
+
+        div.innerHTML = `
+
+          <div class="notification-title">
+            ${n.title || "Notification"}
+          </div>
+
+          <p>
+            ${n.message || ""}
+          </p>
+
+          <div class="notification-time">
+            ${formatDate(n.createdAt)}
+          </div>
+
+          ${
+            !n.read
+            ?
+            `
+            <button
+              class="green"
+              onclick="markNotificationRead(
+                '${n.id}'
+              )">
+
+              ✓ Mark as read
+
+            </button>
+            `
+            :
+            ""
+          }
+
+        `;
+
+
+        list.appendChild(div);
+
+      }
+    );
+
+
+    if(unread > 0){
+
+      count.textContent =
+        unread;
+
+      count.style.display =
+        "flex";
+
+    }
+    else{
+
+      count.style.display =
+        "none";
+
+    }
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    list.innerHTML =
+      '<p class="empty">Unable to load notifications.</p>';
+
+  }
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+   ===================================================== */
+
+function formatDate(timestamp){
+
+  if(!timestamp){
+
+    return "";
+
+  }
+
+
+  try{
+
+    if(timestamp.seconds){
+
+      return new Date(
+        timestamp.seconds * 1000
+      ).toLocaleString();
+
+    }
+
+
+    return new Date(
+      timestamp
+    ).toLocaleString();
+
+  }
+
+  catch{
+
+    return "";
+
+  }
+
+}
+
+
+/* =====================================================
+   MARK ONE READ
+   ===================================================== */
+
+window.markNotificationRead =
+async function(
+  notificationId
+){
+
+  try{
+
+    await updateDoc(
+
+      doc(
+        db,
+        "notifications",
+        notificationId
+      ),
+
+      {
+        read:true
+      }
+
+    );
+
+
+    loadNotifications();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Unable to mark notification."
+    );
+
+  }
+
+};
+
+
+/* =====================================================
+   MARK ALL READ
+   ===================================================== */
+
+document
+  .getElementById("markAllRead")
+  .addEventListener(
+    "click",
+    async function(){
+
+      const profile =
+        getMyProfile();
+
+
+      if(!profile){
+
+        alert(
+          "Please create your profile first."
+        );
+
+        return;
+
+      }
+
+
+      try{
+
+        const snapshot =
+          await getDocs(
+            query(
+              collection(
+                db,
+                "notifications"
+              ),
+
+              where(
+                "targetBgmi",
+                "==",
+                profile.bgmi
+              ),
+
+              where(
+                "read",
+                "==",
+                false
+              )
+
+            )
+          );
+
+
+        for(
+          const notificationDoc
+          of snapshot.docs
+        ){
+
+          await updateDoc(
+
+            doc(
+              db,
+              "notifications",
+              notificationDoc.id
+            ),
+
+            {
+              read:true
+            }
+
+          );
+
+        }
+
+
+        loadNotifications();
+
+      }
+
+      catch(error){
+
+        console.error(error);
+
+        alert(
+          "Unable to mark notifications."
+        );
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   NOTIFICATION BUTTON
+   ===================================================== */
+
+document
+  .getElementById("notificationButton")
+  .addEventListener(
+    "click",
+    function(){
+
+      document
+        .getElementById("notifications")
+        .scrollIntoView({
+          behavior:"smooth"
+        });
+
+    }
+  );
+
+
+/* =====================================================
+   PROFILE BUTTON
+   ===================================================== */
+
+document
+  .getElementById("profileButton")
+  .addEventListener(
+    "click",
+    function(){
+
+      document
+        .getElementById("profilePanel")
+        .style.display =
+        "block";
+
+    }
+  );
+
+
+document
+  .getElementById("closeProfile")
+  .addEventListener(
+    "click",
+    function(){
+
+      document
+        .getElementById("profilePanel")
+        .style.display =
+        "none";
+
+    }
+  );
+
+
+document
+  .getElementById("viewMyProfile")
+  .addEventListener(
+    "click",
+    function(){
+
+      document
+        .getElementById("profilePanel")
+        .style.display =
+        "block";
+
+    }
+  );
+
+
+/* =====================================================
+   START
+   ===================================================== */
 
 loadMyProfile();
+
 loadPlayers();
+
 loadSquads();
+
 loadRequests();
+
+loadNotifications();
+
+
+/*
+Refresh notifications periodically.
+This checks for new notifications every 15 seconds.
+*/
+
+setInterval(
+  loadNotifications,
+  15000
+);
 
 </script>
 
